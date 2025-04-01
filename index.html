@@ -546,7 +546,7 @@
                     <div class="payment-options">
                         <h3 class="payment-title">Pagamento</h3>
                         
-                        <a href="https://www.mercadopago.com.br/payment-link/v1/redirect?preference-id=2319817548-21bfe3bf-8c3d-4d08-8c90-f579198147b8&source=link" class="payment-btn" target="_blank">
+                        <a href="https://www.mercadopago.com.br/payment-link/v1/redirect?preference-id=2319817548-21bfe3bf-8c3d-4d08-8c90-f579198147b8&source=link" class="payment-btn" id="mercado-pago-btn" target="_blank">
                             <i class="fas fa-credit-card"></i> Pagar com Cartão de Crédito ou PIX
                         </a>
                     </div>
@@ -918,6 +918,36 @@
                 
                 // Rolar até a mensagem
                 messageDiv.scrollIntoView({ behavior: 'smooth' });
+            }
+            // Configurar botão de pagamento para abrir em nova janela
+            const paymentButton = document.getElementById('mercado-pago-btn');
+            if (paymentButton) {
+                paymentButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+        
+                    // Abrir o Mercado Pago em uma janela pop-up
+                    window.open(this.href, 'MercadoPago', 'width=1000,height=700');
+        
+                    // Mostrar mensagem informativa
+                    const infoMessage = document.createElement('p');
+                    infoMessage.innerHTML = '<i class="fas fa-info-circle"></i> Uma nova janela foi aberta para o pagamento. Após concluir, retorne a esta página para finalizar sua inscrição.';
+                    infoMessage.className = 'payment-info-message';
+                    infoMessage.style.color = '#4CAF50';
+                    infoMessage.style.marginTop = '10px';
+                    infoMessage.style.fontSize = '0.9rem';
+                    infoMessage.style.textAlign = 'center';
+        
+                    // Remover qualquer mensagem anterior
+                    const oldMessage = document.querySelector('.payment-info-message');
+                    if (oldMessage) {
+                        oldMessage.remove();
+                    }
+        
+                    // Inserir a nova mensagem
+                    this.parentNode.appendChild(infoMessage);
+            
+                    return false;
+                });
             }
         });
     </script>
