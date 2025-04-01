@@ -376,36 +376,6 @@
             margin-right: 3px;
         }
         
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            background-color: #f4a261;
-            color: #222;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-top: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .submit-btn:hover {
-            background-color: #e76f51;
-            color: #fff;
-        }
-        
-        .submit-btn:disabled {
-            background-color: #ccc;
-            color: #666;
-            cursor: not-allowed;
-        }
-        
-        .submit-btn:disabled:hover {
-            background-color: #ccc;
-            color: #666;
-        }
-        
         .upload-hint {
             color: #FFD700;
             font-size: 0.9rem;
@@ -528,12 +498,12 @@
             text-align: center;
             font-size: 0.8rem;
             position: absolute;
-            width: 120px; /* Aumentado de 100px para 120px */
+            width: 120px;
             left: 50%;
             transform: translateX(-50%);
             top: 40px;
             color: rgba(255, 255, 255, 0.8);
-            line-height: 1.4; /* Adicionado para melhorar espaçamento vertical */
+            line-height: 1.4;
         }
         
         .step.active .step-title {
@@ -544,88 +514,75 @@
             color: #4CAF50;
         }
         
-        /* Formulário */
+        /* Formulário - NOVOS ESTILOS PARA OS BOTÕES */
         .form-navigation {
             display: flex;
             justify-content: space-between;
             margin-top: 40px;
-            gap: 15px; /* Adicionado espaçamento entre os botões */
+            gap: 15px;
+            width: 100%;
+        }
+        
+        .btn-prev, .btn-next, .submit-btn {
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            min-height: 54px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .btn-prev {
-            background-color: rgba(150, 150, 150, 0.3); /* Cor mais suave para o botão voltar */
+            background-color: rgba(50, 50, 50, 0.3);
             color: white;
-            border: none;
-            padding: 15px 40px; /* Aumentado o padding horizontal */
-            border-radius: 5px; /* Aumentado para combinar com o botão finalizar */
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            min-width: 140px; /* Largura mínima */
-            text-align: center;
+            min-width: 120px;
+            flex: 0 0 auto;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .btn-next, .submit-btn {
-            background-color: #f4a261;
-            color: #222;
-            border: none;
-            padding: 15px 40px; /* Aumentado o padding horizontal */
-            border-radius: 5px; /* Aumentado o arredondamento */
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            flex-grow: 1; /* Faz o botão de finalizar ocupar mais espaço */
-            text-align: center;
+            background: linear-gradient(to bottom, #f4a261, #e76f51);
+            color: white;
+            flex: 1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            text-transform: uppercase;
+            font-weight: 700;
         }
         
-        .btn-next:hover, 
+        .btn-next:hover, .submit-btn:hover {
+            background: linear-gradient(to bottom, #e76f51, #e76f51);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+        
         .btn-prev:hover {
-            background-color: #e76f51;
-            color: white;
+            background-color: rgba(80, 80, 80, 0.4);
         }
         
-        /* Se estiver na etapa 2, ajuste os botões */
-        #form-step-2 .form-navigation {
-            display: grid;
-            grid-template-columns: 140px 1fr; /* Botão voltar com largura fixa, finalizar inscrição com resto do espaço */
-            gap: 15px;
+        .submit-btn:disabled {
+            background: linear-gradient(to bottom, #cccccc, #999999);
+            color: #666;
+            cursor: not-allowed;
+            box-shadow: none;
         }
         
-        .summary-info {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
-            padding: 20px;
-            margin-bottom: 30px;
+        .submit-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
         }
         
-        .summary-info h3 {
-            color: #f4a261;
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .btn-prev i, .btn-next i, .submit-btn i {
+            margin-right: 8px;
         }
         
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 10px;
-        }
-        
-        .summary-row:last-child {
-            border-bottom: none;
-        }
-        
-        .summary-label {
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .summary-value {
-            color: white;
-        }
-        
-        /* Responsive */
+        /* Estilos responsivos para dispositivos móveis */
         @media (max-width: 768px) {
             .hero {
                 padding: 20px 0;
@@ -662,6 +619,65 @@
             .step-line {
                 top: 15px;
             }
+            
+            /* Ajuste responsivo para os botões de navegação */
+            .form-navigation {
+                flex-direction: column;
+                gap: 12px;
+            }
+            
+            .btn-prev {
+                min-width: 100%;
+                order: 2; /* Move o botão voltar para baixo em dispositivos móveis */
+            }
+            
+            .btn-next, .submit-btn {
+                min-width: 100%;
+                order: 1; /* Move o botão principal para cima em dispositivos móveis */
+            }
+            
+            /* Ajuste para etapa 2 do formulário */
+            #form-step-2 .form-navigation {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
+        /* Para telas muito pequenas */
+        @media (max-width: 360px) {
+            .btn-prev, .btn-next, .submit-btn {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+            }
+        }
+        
+        .upload-button-container {
+            margin: 30px auto 20px auto;
+            text-align: center;
+        }
+        
+        .upload-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 24px;
+            background: linear-gradient(to bottom, #FFD700, #f4a261);
+            color: #333;
+            font-weight: 700;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            max-width: 100%;
+            width: 280px;
+        }
+        
+        .upload-button i {
+            margin-right: 10px;
         }
     </style>
 </head>
@@ -748,7 +764,9 @@
                         </div>
                         
                         <div class="form-navigation">
-                            <button type="button" class="btn-next" id="btn-to-step-2">PROSSEGUIR PARA PAGAMENTO</button>
+                            <button type="button" class="btn-next" id="btn-to-step-2">
+                                <i class="fas fa-arrow-right"></i> PROSSEGUIR PARA PAGAMENTO
+                            </button>
                         </div>
                     </div>
                     
@@ -793,32 +811,23 @@
                             2. Uma janela vai se abrir com os arquivos do seu celular ou computador<br>
                             3. Procure e selecione a <strong>foto ou o PDF</strong> do seu comprovante (seja do PIX ou do Cartão)<br>
                             4. Depois, clique no botão <strong>"FINALIZAR INSCRIÇÃO"</strong> para concluir o envio
-                        </p>
-                        <div style="margin: 24px auto 12px auto; max-width: 400px; text-align: center;">
-                            <label for="comprovante" style="
-                                    display: inline-block;
-                                    padding: 10px 18px;
-                                    background-color: #f6b93b;
-                                    color: white;
-                                    font-weight: bold;
-                                    border-radius: 6px;
-                                    cursor: pointer;
-                                    font-size: 1rem;
-                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-                            ">
-                                📎 Escolher comprovante
-                            </label>
-                        <div style="margin: 24px auto 12px auto; max-width: 400px;">
-                            <input
-                                type="file"
-                                id="comprovante"
-                                name="comprovante"
-                                accept=".jpg,.jpeg,.png,.pdf"
-                                required
-                                aria-label="Comprovante de pagamento"
-                                style="display: none;"
-                               >
-                        </div>
+                            </p>
+                            
+                            <div class="upload-button-container">
+                                <label for="comprovante" class="upload-button">
+                                    <i class="fas fa-paperclip"></i> Escolher comprovante
+                                </label>
+                                <input
+                                    type="file"
+                                    id="comprovante"
+                                    name="comprovante"
+                                    accept=".jpg,.jpeg,.png,.pdf"
+                                    required
+                                    aria-label="Comprovante de pagamento"
+                                    style="display: none;"
+                                >
+                            </div>
+                            
                             <div class="file-types">
                                 Formatos suportados: 
                                 <span class="file-type-badge"><i class="fas fa-check file-type-icon"></i> .jpg / .jpeg</span>
@@ -829,447 +838,449 @@
                             <div class="error-message" id="comprovante-error">Por favor, anexe o comprovante de pagamento.</div>
                         </div>
                         
+                        <!-- Novos botões de navegação responsivos -->
                         <div class="form-navigation">
-                            <button type="button" class="btn-prev" id="btn-to-step-1">VOLTAR</button>
-                            <button type="submit" class="submit-btn" id="finalizar-btn" disabled>FINALIZAR INSCRIÇÃO</button>
+                            <button type="button" class="btn-prev" id="btn-to-step-1">
+                                <i class="fas fa-arrow-left"></i> VOLTAR</button>
+                                <button type="submit" class="submit-btn" id="finalizar-btn" disabled>
+                                    <i class="fas fa-check-circle"></i> FINALIZAR INSCRIÇÃO
+                                </button>
+                            </div>
+                            
+                            <p id="upload-message" class="upload-hint">Por favor, envie o comprovante para concluir sua inscrição.</p>
                         </div>
                         
-                        <p id="upload-message" class="upload-hint">Por favor, envie o comprovante para concluir sua inscrição.</p>
-                    </div>
-                    
-                    <div id="form-messages"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <h3>NEEL - Núcleo Esp<footer>
-                <div class="container">
-                    <h3>NEEL - Núcleo Espírita Esperança de Luz</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-whatsapp"></i></a>
-                    </div>
-                    <p>&copy; 2025 NEEL - Todos os direitos reservados</p>
+                        <div id="form-messages"></div>
+                    </form>
                 </div>
-            </footer>
+            </div>
+        </section>
         
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    // Referências aos campos do formulário
-                    const form = document.getElementById('inscricaoForm');
-                    const nomeInput = document.getElementById('nome');
-                    const cpfInput = document.getElementById('cpf');
-                    const telefoneInput = document.getElementById('telefone');
-                    const emailInput = document.getElementById('email');
-                    const cidadeInput = document.getElementById('cidade');
-                    const comprovanteInput = document.getElementById('comprovante');
-                    const finalizarBtn = document.getElementById('finalizar-btn');
-                    const uploadMessage = document.getElementById('upload-message');
-                    
-                    // Referências às mensagens de erro
-                    const nomeError = document.getElementById('nome-error');
-                    const cpfError = document.getElementById('cpf-error');
-                    const telefoneError = document.getElementById('telefone-error');
-                    const emailError = document.getElementById('email-error');
-                    const cidadeError = document.getElementById('cidade-error');
-                    const comprovanteError = document.getElementById('comprovante-error');
-                    
-                    // Referências às etapas e navegação
-                    const step1 = document.getElementById('form-step-1');
-                    const step2 = document.getElementById('form-step-2');
-                    const btnToStep2 = document.getElementById('btn-to-step-2');
-                    const btnToStep1 = document.getElementById('btn-to-step-1');
-                    const stepIndicator1 = document.getElementById('step-1');
-                    const stepIndicator2 = document.getElementById('step-2');
-                    const stepLine1 = document.getElementById('line-1');
-                    
-                    // Referências aos resumos da etapa 2
-                    const summaryNome = document.getElementById('summary-nome');
-                    const summaryEmail = document.getElementById('summary-email');
-                    const summaryTelefone = document.getElementById('summary-telefone');
-                    
-                    // Referência ao botão de pagamento do Mercado Pago
-                    const mercadoPagoBtn = document.getElementById('mercado-pago-btn');
-                    
-                    // Formatação de CPF
-                    if (cpfInput) {
-                        cpfInput.addEventListener('input', function (e) {
-                            let value = e.target.value.replace(/\D/g, '');
-                            if (value.length > 11) value = value.slice(0, 11);
-                            
-                            if (value.length > 9) {
-                                value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
-                            } else if (value.length > 6) {
-                                value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
-                            } else if (value.length > 3) {
-                                value = value.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
-                            }
-                            
-                            e.target.value = value;
-                            validateField(cpfInput, validateCPF, cpfError);
-                        });
-                    }
-                    
-                    // Formatação de telefone
-                    if (telefoneInput) {
-                        telefoneInput.addEventListener('input', function (e) {
-                            let value = e.target.value.replace(/\D/g, '');
-                            if (value.length > 11) value = value.slice(0, 11);
-                            
-                            if (value.length > 10) {
-                                value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
-                            } else if (value.length > 6) {
-                                value = value.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
-                            } else if (value.length > 2) {
-                                value = value.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
-                            }
-                            
-                            e.target.value = value;
-                            validateField(telefoneInput, validatePhone, telefoneError);
-                        });
-                    }
-                    
-                    // Validação de e-mail
-                    if (emailInput) {
-                        emailInput.addEventListener('input', function() {
-                            validateField(emailInput, validateEmail, emailError);
-                        });
-                    }
-                    
-                    // Validação de nome
-                    if (nomeInput) {
-                        nomeInput.addEventListener('input', function() {
-                            validateField(nomeInput, validateRequired, nomeError);
-                        });
-                    }
-                    
-                    // Validação de cidade
-                    if (cidadeInput) {
-                        cidadeInput.addEventListener('input', function() {
-                            validateField(cidadeInput, validateRequired, cidadeError);
-                        });
-                    }
-                    
-                    // Ativar o botão de finalizar apenas quando o comprovante for enviado
-                    if (comprovanteInput && finalizarBtn) {
-                        comprovanteInput.addEventListener('change', function() {
-                            if (this.files.length > 0) {
-                                // Verificar o tipo de arquivo
-                                const fileType = this.files[0].type;
-                                const fileName = this.files[0].name.toLowerCase();
-                                const fileExtension = fileName.split('.').pop();
-                                const validExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
-                                
-                                if (
-                                    fileType.startsWith('image/jpeg') || 
-                                    fileType.startsWith('image/png') || 
-                                    fileType === 'application/pdf' ||
-                                    validExtensions.includes(fileExtension)
-                                ) {
-                                    finalizarBtn.disabled = false;
-                                    uploadMessage.textContent = "Comprovante recebido! Você já pode finalizar sua inscrição.";
-                                    uploadMessage.style.color = "#4CAF50";
-                                    comprovanteError.style.display = 'none';
-                                } else {
-                                    finalizarBtn.disabled = true;
-                                    uploadMessage.textContent = "Formato de arquivo não suportado. Use apenas JPG, PNG ou PDF.";
-                                    uploadMessage.style.color = "#ff6b6b";
-                                    comprovanteError.textContent = "Formato inválido. Utilize apenas imagens JPG, PNG ou arquivos PDF.";
-                                    comprovanteError.style.display = 'block';
-                                    this.value = ''; // Limpa o campo
-                                }
-                            } else {
-                                finalizarBtn.disabled = true;
-                                uploadMessage.textContent = "Por favor, faça o upload do comprovante para habilitar a inscrição";
-                                uploadMessage.style.color = "#FFD700";
-                            }
-                        });
-                    }
-                    
-                    // Configurar o botão do Mercado Pago para abrir em uma nova janela
-                    if (mercadoPagoBtn) {
-                        mercadoPagoBtn.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            
-                            // Abrir o Mercado Pago em uma janela pop-up
-                            window.open(this.href, 'MercadoPago', 'width=1000,height=700');
-                            
-                            // Mostrar mensagem informativa
-                            const infoMessage = document.createElement('p');
-                            infoMessage.innerHTML = '<i class="fas fa-info-circle"></i> Uma nova janela foi aberta para o pagamento. Após concluir, retorne a esta página para finalizar sua inscrição.';
-                            infoMessage.className = 'payment-info-message';
-                            infoMessage.style.color = '#4CAF50';
-                            infoMessage.style.marginTop = '10px';
-                            infoMessage.style.fontSize = '0.9rem';
-                            infoMessage.style.textAlign = 'center';
-                            
-                            // Remover qualquer mensagem anterior
-                            const oldMessage = document.querySelector('.payment-info-message');
-                            if (oldMessage) {
-                                oldMessage.remove();
-                            }
-                            
-                            // Inserir a nova mensagem
-                            this.parentNode.appendChild(infoMessage);
-                            
-                            return false;
-                        });
-                    }
-                    
-                    // Navegação entre etapas
-                    if (btnToStep2) {
-                        btnToStep2.addEventListener('click', function() {
-                            // Validar os campos antes de avançar
-                            let isValid = true;
-                            
-                            // Validar nome
-                            if (!validateField(nomeInput, validateRequired, nomeError)) {
-                                isValid = false;
-                                nomeInput.classList.add('shake');
-                                setTimeout(() => nomeInput.classList.remove('shake'), 500);
-                            }
-                            
-                            // Validar CPF
-                            if (!validateField(cpfInput, validateCPF, cpfError)) {
-                                isValid = false;
-                                cpfInput.classList.add('shake');
-                                setTimeout(() => cpfInput.classList.remove('shake'), 500);
-                            }
-                            
-                            // Validar telefone
-                            if (!validateField(telefoneInput, validatePhone, telefoneError)) {
-                                isValid = false;
-                                telefoneInput.classList.add('shake');
-                                setTimeout(() => telefoneInput.classList.remove('shake'), 500);
-                            }
-                            
-                            // Validar email
-                            if (!validateField(emailInput, validateEmail, emailError)) {
-                                isValid = false;
-                                emailInput.classList.add('shake');
-                                setTimeout(() => emailInput.classList.remove('shake'), 500);
-                            }
-                            
-                            // Validar cidade
-                            if (!validateField(cidadeInput, validateRequired, cidadeError)) {
-                                isValid = false;
-                                cidadeInput.classList.add('shake');
-                                setTimeout(() => cidadeInput.classList.remove('shake'), 500);
-                            }
-                            
-                            if (!isValid) {
-                                showMessage('Por favor, preencha todos os campos obrigatórios corretamente.', 'error');
-                                return;
-                            }
-                            
-                            // Mostrar mensagem de enviando
-                            showMessage('Salvando dados pessoais, aguarde...', 'info');
-                            
-                            // Salvar os dados no webhook do Make.com (sem o comprovante)
-                            const formData = new FormData();
-                            formData.append('nome', nomeInput.value);
-                            formData.append('cpf', cpfInput.value);
-                            formData.append('telefone', telefoneInput.value);
-                            formData.append('email', emailInput.value);
-                            formData.append('cidade', cidadeInput.value);
-                            formData.append('newsletter', document.getElementById('newsletter').checked);
-                            formData.append('etapa', 'dados_pessoais'); // Identificador da etapa
-                            
-                            // Enviar dados ao Make.com
-                            fetch('https://hook.us1.make.com/dojpud8qt96tb4psl0qok60es794vf6c', {
-                                method: 'POST',
-                                body: formData,
-                                mode: 'no-cors'
-                            })
-                            .then(response => {
-                                // Atualizar os resumos na etapa 2
-                                summaryNome.textContent = nomeInput.value;
-                                summaryEmail.textContent = emailInput.value;
-                                summaryTelefone.textContent = telefoneInput.value;
-                                
-                                // Esconder a etapa 1 e mostrar a etapa 2
-                                step1.classList.remove('active');
-                                step2.classList.add('active');
-                                
-                                // Atualizar os indicadores de etapa
-                                stepIndicator1.classList.remove('active');
-                                stepIndicator1.classList.add('completed');
-                                stepIndicator2.classList.add('active');
-                                stepLine1.classList.add('active');
-                                
-                                // Limpar mensagem
-                                document.getElementById('form-messages').style.display = 'none';
-                                
-                                // Rolar para o topo do formulário
-                                form.scrollIntoView({ behavior: 'smooth' });
-                            })
-                            .catch(error => {
-                                console.error('Erro ao salvar dados:', error);
-                                showMessage('Ocorreu um erro ao salvar seus dados. Por favor, tente novamente.', 'error');
-                            });
-                        });
-                    }
-                    
-                    // Botão para voltar à etapa 1
-                    if (btnToStep1) {
-                        btnToStep1.addEventListener('click', function() {
-                            // Esconder a etapa 2 e mostrar a etapa 1
-                            step2.classList.remove('active');
-                            step1.classList.add('active');
-                            
-                            // Atualizar os indicadores de etapa
-                            stepIndicator2.classList.remove('active');
-                            stepIndicator1.classList.remove('completed');
-                            stepIndicator1.classList.add('active');
-                            stepLine1.classList.remove('active');
-                        });
-                    }
-                    
-                    // Função para validar campo
-                    function validateField(field, validationFn, errorElement) {
-                        if (validationFn(field.value)) {
-                            field.style.borderColor = "rgba(255, 255, 255, 0.2)";
-                            errorElement.style.display = 'none';
-                            return true;
-                        } else {
-                            field.style.borderColor = "#ff6b6b";
-                            errorElement.style.display = 'block';
-                            return false;
+        <footer>
+            <div class="container">
+                <h3>NEEL - Núcleo Espírita Esperança de Luz</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <p>&copy; 2025 NEEL - Todos os direitos reservados</p>
+            </div>
+        </footer>
+    
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Referências aos campos do formulário
+                const form = document.getElementById('inscricaoForm');
+                const nomeInput = document.getElementById('nome');
+                const cpfInput = document.getElementById('cpf');
+                const telefoneInput = document.getElementById('telefone');
+                const emailInput = document.getElementById('email');
+                const cidadeInput = document.getElementById('cidade');
+                const comprovanteInput = document.getElementById('comprovante');
+                const finalizarBtn = document.getElementById('finalizar-btn');
+                const uploadMessage = document.getElementById('upload-message');
+                
+                // Referências às mensagens de erro
+                const nomeError = document.getElementById('nome-error');
+                const cpfError = document.getElementById('cpf-error');
+                const telefoneError = document.getElementById('telefone-error');
+                const emailError = document.getElementById('email-error');
+                const cidadeError = document.getElementById('cidade-error');
+                const comprovanteError = document.getElementById('comprovante-error');
+                
+                // Referências às etapas e navegação
+                const step1 = document.getElementById('form-step-1');
+                const step2 = document.getElementById('form-step-2');
+                const btnToStep2 = document.getElementById('btn-to-step-2');
+                const btnToStep1 = document.getElementById('btn-to-step-1');
+                const stepIndicator1 = document.getElementById('step-1');
+                const stepIndicator2 = document.getElementById('step-2');
+                const stepLine1 = document.getElementById('line-1');
+                
+                // Referências aos resumos da etapa 2
+                const summaryNome = document.getElementById('summary-nome');
+                const summaryEmail = document.getElementById('summary-email');
+                const summaryTelefone = document.getElementById('summary-telefone');
+                
+                // Referência ao botão de pagamento do Mercado Pago
+                const mercadoPagoBtn = document.getElementById('mercado-pago-btn');
+                
+                // Formatação de CPF
+                if (cpfInput) {
+                    cpfInput.addEventListener('input', function (e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 11) value = value.slice(0, 11);
+                        
+                        if (value.length > 9) {
+                            value = value.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/, '$1.$2.$3-$4');
+                        } else if (value.length > 6) {
+                            value = value.replace(/^(\d{3})(\d{3})(\d{0,3}).*/, '$1.$2.$3');
+                        } else if (value.length > 3) {
+                            value = value.replace(/^(\d{3})(\d{0,3}).*/, '$1.$2');
                         }
-                    }
-                    
-                    // Funções de validação
-                    function validateRequired(value) {
-                        return value.trim() !== '';
-                    }
-                    
-                    function validateEmail(email) {
-                        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                        return re.test(email);
-                    }
-                    
-                    function validateCPF(cpf) {
-                        // Remove non-digits
-                        cpf = cpf.replace(/\D/g, '');
                         
-                        // Must have 11 digits
-                        if (cpf.length !== 11) return false;
+                        e.target.value = value;
+                        validateField(cpfInput, validateCPF, cpfError);
+                    });
+                }
+                
+                // Formatação de telefone
+                if (telefoneInput) {
+                    telefoneInput.addEventListener('input', function (e) {
+                        let value = e.target.value.replace(/\D/g, '');
+                        if (value.length > 11) value = value.slice(0, 11);
                         
-                        // Check if all digits are the same
-                        if (/^(\d)\1+$/.test(cpf)) return false;
+                        if (value.length > 10) {
+                            value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/, '($1) $2-$3');
+                        } else if (value.length > 6) {
+                            value = value.replace(/^(\d{2})(\d{4,5})(\d{0,4}).*/, '($1) $2-$3');
+                        } else if (value.length > 2) {
+                            value = value.replace(/^(\d{2})(\d{0,5}).*/, '($1) $2');
+                        }
                         
-                        // Simple check - this is not a full CPF validation
-                        // For a complete validation, implement the algorithm
-                        return cpf.length === 11;
-                    }
-                    
-                    function validatePhone(phone) {
-                        // Remove non-digits
-                        phone = phone.replace(/\D/g, '');
-                        
-                        // Must have 10 or 11 digits (with area code)
-                        return phone.length >= 10 && phone.length <= 11;
-                    }
-                    
-                    // Manipular envio do formulário
-                    if (form) {
-                        form.addEventListener('submit', function(e) {
-                            e.preventDefault();
-                            
-                            // Verificar se arquivo foi enviado
-                            if (comprovanteInput.files.length === 0) {
-                                comprovanteError.style.display = 'block';
-                                comprovanteInput.classList.add('shake');
-                                setTimeout(() => comprovanteInput.classList.remove('shake'), 500);
-                                showMessage('Por favor, anexe o comprovante de pagamento.', 'error');
-                                return;
-                            }
-                            
-                            // Verificar formato do arquivo
-                            const fileType = comprovanteInput.files[0].type;
-                            const fileName = comprovanteInput.files[0].name.toLowerCase();
+                        e.target.value = value;
+                        validateField(telefoneInput, validatePhone, telefoneError);
+                    });
+                }
+                
+                // Validação de e-mail
+                if (emailInput) {
+                    emailInput.addEventListener('input', function() {
+                        validateField(emailInput, validateEmail, emailError);
+                    });
+                }
+                
+                // Validação de nome
+                if (nomeInput) {
+                    nomeInput.addEventListener('input', function() {
+                        validateField(nomeInput, validateRequired, nomeError);
+                    });
+                }
+                
+                // Validação de cidade
+                if (cidadeInput) {
+                    cidadeInput.addEventListener('input', function() {
+                        validateField(cidadeInput, validateRequired, cidadeError);
+                    });
+                }
+                
+                // Ativar o botão de finalizar apenas quando o comprovante for enviado
+                if (comprovanteInput && finalizarBtn) {
+                    comprovanteInput.addEventListener('change', function() {
+                        if (this.files.length > 0) {
+                            // Verificar o tipo de arquivo
+                            const fileType = this.files[0].type;
+                            const fileName = this.files[0].name.toLowerCase();
                             const fileExtension = fileName.split('.').pop();
                             const validExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
                             
-                            if (!(
+                            if (
                                 fileType.startsWith('image/jpeg') || 
                                 fileType.startsWith('image/png') || 
                                 fileType === 'application/pdf' ||
                                 validExtensions.includes(fileExtension)
-                            )) {
+                            ) {
+                                finalizarBtn.disabled = false;
+                                uploadMessage.textContent = "Comprovante recebido! Você já pode finalizar sua inscrição.";
+                                uploadMessage.style.color = "#4CAF50";
+                                comprovanteError.style.display = 'none';
+                            } else {
+                                finalizarBtn.disabled = true;
+                                uploadMessage.textContent = "Formato de arquivo não suportado. Use apenas JPG, PNG ou PDF.";
+                                uploadMessage.style.color = "#ff6b6b";
                                 comprovanteError.textContent = "Formato inválido. Utilize apenas imagens JPG, PNG ou arquivos PDF.";
                                 comprovanteError.style.display = 'block';
-                                comprovanteInput.classList.add('shake');
-                                setTimeout(() => comprovanteInput.classList.remove('shake'), 500);
-                                showMessage('Formato de arquivo não suportado. Use apenas JPG, PNG ou PDF.', 'error');
-                                return;
+                                this.value = ''; // Limpa o campo
                             }
-                            
-                            // Mostrar mensagem de carregamento
-                            showMessage('Enviando inscrição, aguarde...', 'info');
-                            
-                            // Coletar dados do formulário
-                            const formData = new FormData();
-                            formData.append('nome', nomeInput.value);
-                            formData.append('cpf', cpfInput.value);
-                            formData.append('telefone', telefoneInput.value);
-                            formData.append('email', emailInput.value);
-                            formData.append('cidade', cidadeInput.value);
-                            formData.append('newsletter', document.getElementById('newsletter').checked);
-                            formData.append('comprovante', comprovanteInput.files[0]);
-                            formData.append('etapa', 'finalizar'); // Identificador da etapa
-                            
-                            // Determinar método de pagamento baseado no arquivo enviado
-                            if (fileName.includes('pix')) {
-                                formData.append('metodoPagamento', 'PIX');
-                            } else {
-                                formData.append('metodoPagamento', 'Cartão de Crédito');
-                            }
-                            
-                            // Enviar para o webhook com tratamento de erros melhorado
-                            fetch('https://hook.us1.make.com/dojpud8qt96tb4psl0qok60es794vf6c', {
-                                method: 'POST',
-                                body: formData,
-                                mode: 'no-cors' // Adiciona modo no-cors para evitar erros de CORS
-                            })
-                            .then(response => {
-                                // Como estamos usando no-cors, não podemos acessar a resposta diretamente
-                                // Vamos assumir que deu certo se chegou até aqui
-                                console.log("Resposta recebida:", response);
-                                showMessage('Inscrição realizada com sucesso! Você receberá um email de confirmação em breve.', 'success');
-                                form.reset();
-                                
-                                // Reseta o estado do botão e mensagem de upload
-                                finalizarBtn.disabled = true;
-                                uploadMessage.textContent = "Por favor, faça o upload do comprovante para habilitar a inscrição";
-                                uploadMessage.style.color = "#FFD700";
-                                
-                                setTimeout(() => {
-                                    window.location.href = 'obrigado.html';
-                                }, 3000);
-                            })
-                            .catch(error => {
-                                console.error('Erro detalhado:', error);
-                                showMessage('Ocorreu um erro ao enviar o formulário: ' + error.message + '. Tente novamente mais tarde ou entre em contato.', 'error');
-                            });
-                        });
-                    }
-                    
-                    // Função para mostrar mensagens ao usuário
-                    function showMessage(message, type) {
-                        const messageDiv = document.getElementById('form-messages');
-                        messageDiv.innerHTML = message;
-                        messageDiv.className = type;
-                        messageDiv.style.display = 'block';
+                        } else {
+                            finalizarBtn.disabled = true;
+                            uploadMessage.textContent = "Por favor, faça o upload do comprovante para habilitar a inscrição";
+                            uploadMessage.style.color = "#FFD700";
+                        }
+                    });
+                }
+                
+                // Configurar o botão do Mercado Pago para abrir em uma nova janela
+                if (mercadoPagoBtn) {
+                    mercadoPagoBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
                         
-                        // Rolar até a mensagem
-                        messageDiv.scrollIntoView({ behavior: 'smooth' });
+                        // Abrir o Mercado Pago em uma janela pop-up
+                        window.open(this.href, 'MercadoPago', 'width=1000,height=700');
+                        
+                        // Mostrar mensagem informativa
+                        const infoMessage = document.createElement('p');
+                        infoMessage.innerHTML = '<i class="fas fa-info-circle"></i> Uma nova janela foi aberta para o pagamento. Após concluir, retorne a esta página para finalizar sua inscrição.';
+                        infoMessage.className = 'payment-info-message';
+                        infoMessage.style.color = '#4CAF50';
+                        infoMessage.style.marginTop = '10px';
+                        infoMessage.style.fontSize = '0.9rem';
+                        infoMessage.style.textAlign = 'center';
+                        
+                        // Remover qualquer mensagem anterior
+                        const oldMessage = document.querySelector('.payment-info-message');
+                        if (oldMessage) {
+                            oldMessage.remove();
+                        }
+                        
+                        // Inserir a nova mensagem
+                        this.parentNode.appendChild(infoMessage);
+                        
+                        return false;
+                    });
+                }
+                
+                // Navegação entre etapas
+                if (btnToStep2) {
+                    btnToStep2.addEventListener('click', function() {
+                        // Validar os campos antes de avançar
+                        let isValid = true;
+                        
+                        // Validar nome
+                        if (!validateField(nomeInput, validateRequired, nomeError)) {
+                            isValid = false;
+                            nomeInput.classList.add('shake');
+                            setTimeout(() => nomeInput.classList.remove('shake'), 500);
+                        }
+                        
+                        // Validar CPF
+                        if (!validateField(cpfInput, validateCPF, cpfError)) {
+                            isValid = false;
+                            cpfInput.classList.add('shake');
+                            setTimeout(() => cpfInput.classList.remove('shake'), 500);
+                        }
+                        
+                        // Validar telefone
+                        if (!validateField(telefoneInput, validatePhone, telefoneError)) {
+                            isValid = false;
+                            telefoneInput.classList.add('shake');
+                            setTimeout(() => telefoneInput.classList.remove('shake'), 500);
+                        }
+                        
+                        // Validar email
+                        if (!validateField(emailInput, validateEmail, emailError)) {
+                            isValid = false;
+                            emailInput.classList.add('shake');
+                            setTimeout(() => emailInput.classList.remove('shake'), 500);
+                        }
+                        
+                        // Validar cidade
+                        if (!validateField(cidadeInput, validateRequired, cidadeError)) {
+                            isValid = false;
+                            cidadeInput.classList.add('shake');
+                            setTimeout(() => cidadeInput.classList.remove('shake'), 500);
+                        }
+                        
+                        if (!isValid) {
+                            showMessage('Por favor, preencha todos os campos obrigatórios corretamente.', 'error');
+                            return;
+                        }
+                        
+                        // Mostrar mensagem de enviando
+                        showMessage('Salvando dados pessoais, aguarde...', 'info');
+                        
+                        // Salvar os dados no webhook do Make.com (sem o comprovante)
+                        const formData = new FormData();
+                        formData.append('nome', nomeInput.value);
+                        formData.append('cpf', cpfInput.value);
+                        formData.append('telefone', telefoneInput.value);
+                        formData.append('email', emailInput.value);
+                        formData.append('cidade', cidadeInput.value);
+                        formData.append('newsletter', document.getElementById('newsletter').checked);
+                        formData.append('etapa', 'dados_pessoais'); // Identificador da etapa
+                        
+                        // Enviar dados ao Make.com
+                        fetch('https://hook.us1.make.com/dojpud8qt96tb4psl0qok60es794vf6c', {
+                            method: 'POST',
+                            body: formData,
+                            mode: 'no-cors'
+                        })
+                        .then(response => {
+                            // Atualizar os resumos na etapa 2
+                            summaryNome.textContent = nomeInput.value;
+                            summaryEmail.textContent = emailInput.value;
+                            summaryTelefone.textContent = telefoneInput.value;
+                            
+                            // Esconder a etapa 1 e mostrar a etapa 2
+                            step1.classList.remove('active');
+                            step2.classList.add('active');
+                            
+                            // Atualizar os indicadores de etapa
+                            stepIndicator1.classList.remove('active');
+                            stepIndicator1.classList.add('completed');
+                            stepIndicator2.classList.add('active');
+                            stepLine1.classList.add('active');
+                            
+                            // Limpar mensagem
+                            document.getElementById('form-messages').style.display = 'none';
+                            
+                            // Rolar para o topo do formulário
+                            form.scrollIntoView({ behavior: 'smooth' });
+                        })
+                        .catch(error => {
+                            console.error('Erro ao salvar dados:', error);
+                            showMessage('Ocorreu um erro ao salvar seus dados. Por favor, tente novamente.', 'error');
+                        });
+                    });
+                }
+                
+                // Botão para voltar à etapa 1
+                if (btnToStep1) {
+                    btnToStep1.addEventListener('click', function() {
+                        // Esconder a etapa 2 e mostrar a etapa 1
+                        step2.classList.remove('active');
+                        step1.classList.add('active');
+                        
+                        // Atualizar os indicadores de etapa
+                        stepIndicator2.classList.remove('active');
+                        stepIndicator1.classList.remove('completed');
+                        stepIndicator1.classList.add('active');
+                        stepLine1.classList.remove('active');
+                    });
+                }
+                
+                // Função para validar campo
+                function validateField(field, validationFn, errorElement) {
+                    if (validationFn(field.value)) {
+                        field.style.borderColor = "rgba(255, 255, 255, 0.2)";
+                        errorElement.style.display = 'none';
+                        return true;
+                    } else {
+                        field.style.borderColor = "#ff6b6b";
+                        errorElement.style.display = 'block';
+                        return false;
                     }
-                });
-            </script>
-        </body>
-        </html>
+                }
+                
+                // Funções de validação
+                function validateRequired(value) {
+                    return value.trim() !== '';
+                }
+                
+                function validateEmail(email) {
+                    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    return re.test(email);
+                }
+                
+                function validateCPF(cpf) {
+                    // Remove non-digits
+                    cpf = cpf.replace(/\D/g, '');
+                    
+                    // Must have 11 digits
+                    if (cpf.length !== 11) return false;
+                    
+                    // Check if all digits are the same
+                    if (/^(\d)\1+$/.test(cpf)) return false;
+                    
+                    // Simple check - this is not a full CPF validation
+                    // For a complete validation, implement the algorithm
+                    return cpf.length === 11;
+                }
+                
+                function validatePhone(phone) {
+                    // Remove non-digits
+                    phone = phone.replace(/\D/g, '');
+                    
+                    // Must have 10 or 11 digits (with area code)
+                    return phone.length >= 10 && phone.length <= 11;
+                }
+                
+                // Manipular envio do formulário
+                if (form) {
+                    form.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        // Verificar se arquivo foi enviado
+                        if (comprovanteInput.files.length === 0) {
+                            comprovanteError.style.display = 'block';
+                            comprovanteInput.classList.add('shake');
+                            setTimeout(() => comprovanteInput.classList.remove('shake'), 500);
+                            showMessage('Por favor, anexe o comprovante de pagamento.', 'error');
+                            return;
+                        }
+                        
+                        // Verificar formato do arquivo
+                        const fileType = comprovanteInput.files[0].type;
+                        const fileName = comprovanteInput.files[0].name.toLowerCase();
+                        const fileExtension = fileName.split('.').pop();
+                        const validExtensions = ['jpg', 'jpeg', 'png', 'pdf'];
+                        
+                        if (!(
+                            fileType.startsWith('image/jpeg') || 
+                            fileType.startsWith('image/png') || 
+                            fileType === 'application/pdf' ||
+                            validExtensions.includes(fileExtension)
+                        )) {
+                            comprovanteError.textContent = "Formato inválido. Utilize apenas imagens JPG, PNG ou arquivos PDF.";
+                            comprovanteError.style.display = 'block';
+                            comprovanteInput.classList.add('shake');
+                            setTimeout(() => comprovanteInput.classList.remove('shake'), 500);
+                            showMessage('Formato de arquivo não suportado. Use apenas JPG, PNG ou PDF.', 'error');
+                            return;
+                        }
+                        
+                        // Mostrar mensagem de carregamento
+                        showMessage('Enviando inscrição, aguarde...', 'info');
+                        
+                        // Coletar dados do formulário
+                        const formData = new FormData();
+                        formData.append('nome', nomeInput.value);
+                        formData.append('cpf', cpfInput.value);
+                        formData.append('telefone', telefoneInput.value);
+                        formData.append('email', emailInput.value);
+                        formData.append('cidade', cidadeInput.value);
+                        formData.append('newsletter', document.getElementById('newsletter').checked);
+                        formData.append('comprovante', comprovanteInput.files[0]);
+                        formData.append('etapa', 'finalizar'); // Identificador da etapa
+                        
+                        // Determinar método de pagamento baseado no arquivo enviado
+                        if (fileName.includes('pix')) {
+                            formData.append('metodoPagamento', 'PIX');
+                        } else {
+                            formData.append('metodoPagamento', 'Cartão de Crédito');
+                        }
+                        
+                        // Enviar para o webhook com tratamento de erros melhorado
+                        fetch('https://hook.us1.make.com/dojpud8qt96tb4psl0qok60es794vf6c', {
+                            method: 'POST',
+                            body: formData,
+                            mode: 'no-cors' // Adiciona modo no-cors para evitar erros de CORS
+                        })
+                        .then(response => {
+                            // Como estamos usando no-cors, não podemos acessar a resposta diretamente
+                            // Vamos assumir que deu certo se chegou até aqui
+                            console.log("Resposta recebida:", response);
+                            showMessage('Inscrição realizada com sucesso! Você receberá um email de confirmação em breve.', 'success');
+                            form.reset();
+                            
+                            // Reseta o estado do botão e mensagem de upload
+                            finalizarBtn.disabled = true;
+                            uploadMessage.textContent = "Por favor, faça o upload do comprovante para habilitar a inscrição";
+                            uploadMessage.style.color = "#FFD700";
+                            
+                            setTimeout(() => {
+                                window.location.href = 'obrigado.html';
+                            }, 3000);
+                        })
+                        .catch(error => {
+                            console.error('Erro detalhado:', error);
+                            showMessage('Ocorreu um erro ao enviar o formulário: ' + error.message + '. Tente novamente mais tarde ou entre em contato.', 'error');
+                        });
+                    });
+                }
+                
+                // Função para mostrar mensagens ao usuário
+                function showMessage(message, type) {
+                    const messageDiv = document.getElementById('form-messages');
+                    messageDiv.innerHTML = message;
+                    messageDiv.className = type;
+                    messageDiv.style.display = 'block';
+                    
+                    // Rolar até a mensagem
+                    messageDiv.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        </script>
+    </body>
+    </html>
