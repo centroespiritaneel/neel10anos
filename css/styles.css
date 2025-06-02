@@ -105,6 +105,46 @@ p {
   margin-bottom: 10px;
 }
 
+/* Estilo para o card de preço */
+.price-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.price-card {
+  background-color: rgba(0, 0, 0, 0.2);
+  border: 2px solid var(--primary-color);
+  border-radius: 10px;
+  padding: 25px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.price-card:hover {
+  transform: translateY(-5px);
+}
+
+.price-header {
+  margin-bottom: 15px;
+}
+
+.price-header i {
+  font-size: 32px;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.price-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
 .speakers {
   display: flex;
   flex-wrap: wrap;
@@ -386,6 +426,10 @@ footer {
     margin: 20% auto;
     padding: 20px;
   }
+  
+  .price-value {
+    font-size: 2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -400,4 +444,9 @@ footer {
   .form-section, .donation-section, .event-info {
     padding: 20px;
   }
+  
+  .price-value {
+    font-size: 1.8rem;
+  }
 }
+
