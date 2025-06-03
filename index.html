@@ -96,57 +96,53 @@
                     <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
                 </div>
                 
-                <!-- Início do bloco de pagamento (card branco/clean) -->
-                <div class="payment-card">
-                  <!-- Método de Pagamento -->
-                  <fieldset class="payment-fieldset">
-                    <legend>Método de Pagamento</legend>
-                    <label>
-                      <input
-                        type="radio"
-                        name="metodoPagamento"
-                        value="PIX"
-                        id="pagamento-pix"
-                        checked
-                      />
-                      Pagar com PIX
-                    </label>
-                    <label>
-                      <input
-                        type="radio"
-                        name="metodoPagamento"
-                        value="CREDIT_CARD"
-                        id="pagamento-cartao"
-                      />
-                      Pagar com Cartão de Crédito
-                    </label>
-                  </fieldset>
-
-                  <!-- Parcelamento (1 a 6×), inicializado desabilitado para PIX -->
-                  <label for="parcelas" style="font-weight: 600; display: block; margin-bottom: 8px; color: #333333;">
-                    Quantas parcelas? (Cartão de Crédito)
-                  </label>
-                  <select id="parcelas" name="parcelas" disabled required>
-                    <option value="1">1× (à vista)</option>
-                    <option value="2">2×</option>
-                    <option value="3">3×</option>
-                    <option value="4">4×</option>
-                    <option value="5">5×</option>
-                    <option value="6">6×</option>
-                  </select>
-
-                  <!-- Container do Valor Total (dinâmico) -->
-                  <div id="valor-total-container">
-                    <p id="valor-total">Valor Total: R$ 0,00</p>
-                    <p id="detalhe-taxa"></p>
-                  </div>
-
-                  <!-- Botão de Envio -->
-                  <button type="submit" id="btn-inscrever" class="btn-acao">
-                    FINALIZAR INSCRIÇÃO
-                  </button>
+                <div class="form-group">
+                    <fieldset style="border: 1px solid rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                        <legend style="padding: 0 10px;">Método de Pagamento</legend>
+                        <label style="display: block; margin-bottom: 10px;">
+                            <input
+                                type="radio"
+                                name="metodoPagamento"
+                                value="PIX"
+                                id="pagamento-pix"
+                                checked
+                            />
+                            Pagar com PIX
+                        </label>
+                        <label style="display: block;">
+                            <input
+                                type="radio"
+                                name="metodoPagamento"
+                                value="CREDIT_CARD"
+                                id="pagamento-cartao"
+                            />
+                            Pagar com Cartão de Crédito
+                        </label>
+                    </fieldset>
                 </div>
-                <!-- Fim do bloco de pagamento -->
+                
+                <div class="form-group">
+                    <label for="parcelas" style="display: block; margin-bottom: 8px;">
+                        Quantas parcelas? (Cartão de Crédito)
+                    </label>
+                    <select id="parcelas" name="parcelas" disabled required style="width: 100%; padding: 12px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 5px; background-color: rgba(0, 0, 0, 0.2); color: var(--text-color); font-size: 16px; margin-bottom: 20px;">
+                        <option value="1">1× (à vista)</option>
+                        <option value="2">2×</option>
+                        <option value="3">3×</option>
+                        <option value="4">4×</option>
+                        <option value="5">5×</option>
+                        <option value="6">6×</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <div id="valor-total" style="background-color: rgba(230, 166, 76, 0.1); padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; border: 1px solid #e6a64c;">
+                        <h3 style="margin-bottom: 5px; color: #e6a64c;">Valor Total</h3>
+                        <p style="font-size: 1.8rem; font-weight: 700; color: #e6a64c; margin: 0;">R$ 95,00</p>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-block">FINALIZAR INSCRIÇÃO</button>
             </form>
         </section>
         
@@ -193,14 +189,13 @@
 
       document.addEventListener('DOMContentLoaded', function () {
         const inputQuantidade = document.querySelector('#quantidade');
-        const valorTotalEl = document.querySelector('#valor-total');
-        const detalheTaxaEl = document.querySelector('#detalhe-taxa');
+        const valorTotalElement = document.querySelector('#valor-total').querySelector('p');
         const form = document.querySelector('#inscricao-form');
         const metodoPix = document.querySelector('#pagamento-pix');
         const metodoCartao = document.querySelector('#pagamento-cartao');
         const selectParcelas = document.querySelector('#parcelas');
 
-        // Função para atualizar o valor total exibido
+        // Função para calcular e atualizar o valor total
         function atualizarValorTotal() {
           let qtd = parseInt(inputQuantidade.value, 10) || 1;
           if (qtd < 1) qtd = 1;
@@ -208,8 +203,7 @@
           if (metodoPix.checked) {
             // Sem taxa para PIX
             const valorDesejado = PRECO_UNITARIO * qtd;
-            valorTotalEl.textContent = `Valor Total (PIX): R$ ${valorDesejado.toFixed(2).replace('.', ',')}`;
-            detalheTaxaEl.textContent = 'Sem taxa adicional para PIX.';
+            valorTotalElement.textContent = `R$ ${valorDesejado.toFixed(2).replace('.', ',')}`;
           } else {
             // Com taxa para Cartão
             const valorDesejado = PRECO_UNITARIO * qtd;
@@ -220,10 +214,7 @@
             let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
             bruto = Math.ceil(bruto * 100) / 100;
 
-            valorTotalEl.textContent = `Valor Total (Cartão em ${parcelas}×): R$ ${bruto.toFixed(2).replace('.', ',')}`;
-            detalheTaxaEl.textContent = parcelas === 1
-              ? 'Taxa aplicada (à vista): 2,99% + R$ 0,49'
-              : `Taxa aplicada (${parcelas}×): 3,49% + R$ 0,49`;
+            valorTotalElement.textContent = `Valor Total (Cartão em ${parcelas}× + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
           }
         }
 
@@ -294,7 +285,7 @@
           };
 
           // Exibir mensagem de carregamento
-          const submitBtn = document.querySelector('#btn-inscrever');
+          const submitBtn = form.querySelector('button[type="submit"]');
           const originalBtnText = submitBtn.textContent;
           submitBtn.disabled = true;
           submitBtn.textContent = 'Processando...';
