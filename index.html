@@ -16,6 +16,127 @@
     
     <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* Estilos específicos para o método de pagamento e parcelas */
+        .payment-method-container {
+            border: 1px solid rgba(230, 166, 76, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .payment-method-title {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: #e6a64c;
+            font-weight: 600;
+        }
+        
+        .payment-method-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .payment-method-option:hover {
+            background-color: rgba(230, 166, 76, 0.1);
+        }
+        
+        .payment-method-option.selected {
+            background-color: rgba(230, 166, 76, 0.2);
+            border: 1px solid rgba(230, 166, 76, 0.5);
+        }
+        
+        .payment-method-option input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #e6a64c;
+        }
+        
+        .payment-method-option label {
+            cursor: pointer;
+            flex-grow: 1;
+        }
+        
+        .payment-method-icon {
+            margin-right: 10px;
+            color: #e6a64c;
+        }
+        
+        /* Estilo para o select de parcelas */
+        .installments-container {
+            margin-bottom: 20px;
+        }
+        
+        .installments-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #e6a64c;
+            font-weight: 600;
+        }
+        
+        .installments-select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid rgba(230, 166, 76, 0.3);
+            border-radius: 6px;
+            background-color: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 16px;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6a64c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+        
+        .installments-select:focus {
+            outline: none;
+            border-color: #e6a64c;
+            box-shadow: 0 0 0 2px rgba(230, 166, 76, 0.2);
+        }
+        
+        .installments-select:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .installments-select option {
+            background-color: #331a12;
+            color: #fff;
+        }
+        
+        /* Estilo para o botão de finalizar */
+        .btn-finalizar {
+            width: 100%;
+            padding: 14px;
+            background-color: #e6a64c;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .btn-finalizar:hover {
+            background-color: #d4942c;
+        }
+        
+        .btn-finalizar:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -97,35 +218,28 @@
                 </div>
                 
                 <div class="form-group">
-                    <fieldset style="border: 1px solid rgba(255, 255, 255, 0.2); padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                        <legend style="padding: 0 10px;">Método de Pagamento</legend>
-                        <label style="display: block; margin-bottom: 10px;">
-                            <input
-                                type="radio"
-                                name="metodoPagamento"
-                                value="PIX"
-                                id="pagamento-pix"
-                                checked
-                            />
-                            Pagar com PIX
-                        </label>
-                        <label style="display: block;">
-                            <input
-                                type="radio"
-                                name="metodoPagamento"
-                                value="CREDIT_CARD"
-                                id="pagamento-cartao"
-                            />
-                            Pagar com Cartão de Crédito
-                        </label>
-                    </fieldset>
+                    <div class="payment-method-container">
+                        <h3 class="payment-method-title">Método de Pagamento</h3>
+                        
+                        <div class="payment-method-option" id="option-pix">
+                            <input type="radio" id="pagamento-pix" name="metodoPagamento" value="PIX" checked>
+                            <i class="fas fa-qrcode payment-method-icon"></i>
+                            <label for="pagamento-pix">Pagar com PIX</label>
+                        </div>
+                        
+                        <div class="payment-method-option" id="option-cartao">
+                            <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
+                            <i class="fas fa-credit-card payment-method-icon"></i>
+                            <label for="pagamento-cartao">Pagar com Cartão de Crédito</label>
+                        </div>
+                    </div>
                 </div>
                 
-                <div class="form-group">
-                    <label for="parcelas" style="display: block; margin-bottom: 8px;">
+                <div class="form-group installments-container">
+                    <label for="parcelas" class="installments-label">
                         Quantas parcelas? (Cartão de Crédito)
                     </label>
-                    <select id="parcelas" name="parcelas" disabled required style="width: 100%; padding: 12px; border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 5px; background-color: rgba(0, 0, 0, 0.2); color: var(--text-color); font-size: 16px; margin-bottom: 20px;">
+                    <select id="parcelas" name="parcelas" class="installments-select" disabled required>
                         <option value="1">1× (à vista)</option>
                         <option value="2">2×</option>
                         <option value="3">3×</option>
@@ -142,7 +256,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-block">FINALIZAR INSCRIÇÃO</button>
+                <button type="submit" class="btn-finalizar">FINALIZAR INSCRIÇÃO</button>
             </form>
         </section>
         
@@ -194,6 +308,8 @@
         const metodoPix = document.querySelector('#pagamento-pix');
         const metodoCartao = document.querySelector('#pagamento-cartao');
         const selectParcelas = document.querySelector('#parcelas');
+        const optionPix = document.querySelector('#option-pix');
+        const optionCartao = document.querySelector('#option-cartao');
 
         // Função para calcular e atualizar o valor total
         function atualizarValorTotal() {
@@ -221,17 +337,47 @@
         // Recalcular quando mudar quantidade
         inputQuantidade.addEventListener('input', atualizarValorTotal);
 
+        // Melhorar a experiência de seleção do método de pagamento
+        optionPix.addEventListener('click', function() {
+          metodoPix.checked = true;
+          optionPix.classList.add('selected');
+          optionCartao.classList.remove('selected');
+          selectParcelas.setAttribute('disabled', 'disabled');
+          selectParcelas.value = '1';
+          atualizarValorTotal();
+        });
+        
+        optionCartao.addEventListener('click', function() {
+          metodoCartao.checked = true;
+          optionCartao.classList.add('selected');
+          optionPix.classList.remove('selected');
+          selectParcelas.removeAttribute('disabled');
+          atualizarValorTotal();
+        });
+
+        // Inicializar a seleção visual
+        if (metodoPix.checked) {
+          optionPix.classList.add('selected');
+        } else {
+          optionCartao.classList.add('selected');
+        }
+
         // Habilitar/desabilitar parcelas conforme método
         metodoPix.addEventListener('change', function () {
           if (metodoPix.checked) {
             selectParcelas.setAttribute('disabled', 'disabled');
             selectParcelas.value = '1';
+            optionPix.classList.add('selected');
+            optionCartao.classList.remove('selected');
           }
           atualizarValorTotal();
         });
+        
         metodoCartao.addEventListener('change', function () {
           if (metodoCartao.checked) {
             selectParcelas.removeAttribute('disabled');
+            optionCartao.classList.add('selected');
+            optionPix.classList.remove('selected');
           }
           atualizarValorTotal();
         });
@@ -285,7 +431,7 @@
           };
 
           // Exibir mensagem de carregamento
-          const submitBtn = form.querySelector('button[type="submit"]');
+          const submitBtn = document.querySelector('.btn-finalizar');
           const originalBtnText = submitBtn.textContent;
           submitBtn.disabled = true;
           submitBtn.textContent = 'Processando...';
