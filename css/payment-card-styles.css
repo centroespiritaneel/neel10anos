@@ -1,0 +1,84 @@
+/* === PAYMENT CARD (Layout branco/clean) === */
+.payment-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 24px;
+  margin: 24px auto;
+  max-width: 500px;
+  width: 90%;
+}
+
+/* Fieldset do método de pagamento (fundo claro, borda sutil) */
+.payment-fieldset {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  background-color: #fafafa;
+}
+.payment-fieldset legend {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333333;
+}
+.payment-fieldset label {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 24px;
+  font-size: 0.95rem;
+  color: #444444;
+}
+.payment-fieldset input[type="radio"] {
+  margin-right: 8px;
+  accent-color: #e0a33a;
+}
+
+/* Select de parcelas */
+#parcelas {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 16px;
+  background-color: #ffffff;
+}
+
+/* Container do valor total (bruto e detalhamento de taxa) */
+#valor-total-container {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+#valor-total {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #222222;
+  margin: 0;
+}
+#detalhe-taxa {
+  font-size: 0.85rem;
+  color: #777777;
+  margin-top: 4px;
+}
+
+/* Botão "Finalizar Inscrição" estilizado */
+#btn-inscrever {
+  width: 100%;
+  padding: 14px 0;
+  background-color: #e0a33a;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+#btn-inscrever:hover {
+  background-color: #d4942c;
+}
