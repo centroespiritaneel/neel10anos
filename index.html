@@ -37,7 +37,7 @@
         .payment-method-option {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* MUDANÇA: de space-between para flex-start */
             padding: 12px 15px;
             margin-bottom: 8px;
             border-radius: 6px;
@@ -57,6 +57,7 @@
         .payment-method-radio {
             display: flex;
             align-items: center;
+            gap: 10px;
         }
         
         .payment-method-radio input[type="radio"] {
@@ -67,6 +68,7 @@
         .payment-method-label {
             display: flex;
             align-items: center;
+            gap: 8px;
         }
         
         .payment-method-icon {
