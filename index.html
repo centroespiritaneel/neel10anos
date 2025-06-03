@@ -31,12 +31,14 @@
             margin-bottom: 15px;
             color: #e6a64c;
             font-weight: 600;
+            text-align: center;
         }
         
         .payment-method-option {
             display: flex;
             align-items: center;
-            padding: 10px;
+            justify-content: space-between;
+            padding: 12px 15px;
             margin-bottom: 8px;
             border-radius: 6px;
             cursor: pointer;
@@ -52,19 +54,25 @@
             border: 1px solid rgba(230, 166, 76, 0.5);
         }
         
-        .payment-method-option input[type="radio"] {
+        .payment-method-radio {
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-method-radio input[type="radio"] {
             margin-right: 10px;
             accent-color: #e6a64c;
         }
         
-        .payment-method-option label {
-            cursor: pointer;
-            flex-grow: 1;
+        .payment-method-label {
+            display: flex;
+            align-items: center;
         }
         
         .payment-method-icon {
             margin-right: 10px;
             color: #e6a64c;
+            font-size: 1.2rem;
         }
         
         /* Estilo para o select de parcelas */
@@ -77,6 +85,7 @@
             margin-bottom: 8px;
             color: #e6a64c;
             font-weight: 600;
+            text-align: center;
         }
         
         .installments-select {
@@ -95,6 +104,7 @@
             background-position: right 12px center;
             background-size: 16px;
             padding-right: 40px;
+            text-align: center;
         }
         
         .installments-select:focus {
@@ -111,6 +121,29 @@
         .installments-select option {
             background-color: #331a12;
             color: #fff;
+        }
+        
+        /* Estilo para o valor total */
+        .valor-total-container {
+            background-color: rgba(230, 166, 76, 0.1);
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 20px;
+            border: 1px solid #e6a64c;
+        }
+        
+        .valor-total-title {
+            margin-bottom: 5px;
+            color: #e6a64c;
+            font-weight: 600;
+        }
+        
+        .valor-total-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #e6a64c;
+            margin: 0;
         }
         
         /* Estilo para o botão de finalizar */
@@ -222,15 +255,23 @@
                         <h3 class="payment-method-title">Método de Pagamento</h3>
                         
                         <div class="payment-method-option" id="option-pix">
-                            <input type="radio" id="pagamento-pix" name="metodoPagamento" value="PIX" checked>
-                            <i class="fas fa-qrcode payment-method-icon"></i>
-                            <label for="pagamento-pix">Pagar com PIX</label>
+                            <div class="payment-method-radio">
+                                <input type="radio" id="pagamento-pix" name="metodoPagamento" value="PIX" checked>
+                                <div class="payment-method-label">
+                                    <i class="fas fa-qrcode payment-method-icon"></i>
+                                    <span>Pagar com PIX</span>
+                                </div>
+                            </div>
                         </div>
                         
                         <div class="payment-method-option" id="option-cartao">
-                            <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
-                            <i class="fas fa-credit-card payment-method-icon"></i>
-                            <label for="pagamento-cartao">Pagar com Cartão de Crédito</label>
+                            <div class="payment-method-radio">
+                                <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
+                                <div class="payment-method-label">
+                                    <i class="fas fa-credit-card payment-method-icon"></i>
+                                    <span>Pagar com Cartão de Crédito</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -250,9 +291,9 @@
                 </div>
                 
                 <div class="form-group">
-                    <div id="valor-total" style="background-color: rgba(230, 166, 76, 0.1); padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; border: 1px solid #e6a64c;">
-                        <h3 style="margin-bottom: 5px; color: #e6a64c;">Valor Total</h3>
-                        <p style="font-size: 1.8rem; font-weight: 700; color: #e6a64c; margin: 0;">R$ 95,00</p>
+                    <div class="valor-total-container">
+                        <h3 class="valor-total-title">Valor Total</h3>
+                        <p class="valor-total-value">R$ 95,00</p>
                     </div>
                 </div>
                 
@@ -303,7 +344,7 @@
 
       document.addEventListener('DOMContentLoaded', function () {
         const inputQuantidade = document.querySelector('#quantidade');
-        const valorTotalElement = document.querySelector('#valor-total').querySelector('p');
+        const valorTotalElement = document.querySelector('.valor-total-value');
         const form = document.querySelector('#inscricao-form');
         const metodoPix = document.querySelector('#pagamento-pix');
         const metodoCartao = document.querySelector('#pagamento-cartao');
