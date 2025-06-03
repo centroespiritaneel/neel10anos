@@ -96,6 +96,32 @@
                     <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
                 </div>
                 
+                <!-- Método de Pagamento -->
+                <div class="form-group">
+                    <fieldset style="margin-top: 16px; border: 1px solid rgba(230, 166, 76, 0.3); padding: 15px; border-radius: 5px;">
+                        <legend style="font-weight: 700; color: #e6a64c; padding: 0 10px;">Método de Pagamento</legend>
+                        <label style="display: inline-block; margin-right: 20px;">
+                            <input
+                                type="radio"
+                                name="metodoPagamento"
+                                value="PIX"
+                                id="pagamento-pix"
+                                checked
+                            />
+                            Pagar com PIX
+                        </label>
+                        <label style="display: inline-block;">
+                            <input
+                                type="radio"
+                                name="metodoPagamento"
+                                value="CREDIT_CARD"
+                                id="pagamento-cartao"
+                            />
+                            Pagar com Cartão de Crédito
+                        </label>
+                    </fieldset>
+                </div>
+                
                 <div class="form-group">
                     <div id="valor-total" style="background-color: rgba(230, 166, 76, 0.1); padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; border: 1px solid #e6a64c;">
                         <h3 style="margin-bottom: 5px; color: #e6a64c;">Valor Total</h3>
@@ -103,7 +129,7 @@
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-block">Inscrever-se</button>
+                <button type="submit" class="btn btn-block">Finalizar Inscrição</button>
             </form>
         </section>
         
@@ -240,6 +266,11 @@
                     const cep = document.getElementById('cep').value.trim();
                     const quantidade = parseInt(document.getElementById('quantidade').value) || 0;
                     
+                    // Captura método de pagamento selecionado
+                    const metodoPagamento = document.querySelector(
+                        'input[name="metodoPagamento"]:checked'
+                    ).value; // "PIX" ou "CREDIT_CARD"
+                    
                     if (!nome || !email || !telefone || !cpf || !cep || quantidade < 1) {
                         alert('Por favor, preencha todos os campos obrigatórios.');
                         return;
@@ -263,7 +294,8 @@
                         cpf: cpf.replace(/\D/g, ''),
                         cep: cep.replace(/\D/g, ''),
                         quantidade: quantidade,
-                        valor_total: valorTotal
+                        valor_total: valorTotal,
+                        billingType: metodoPagamento // "PIX" ou "CREDIT_CARD"
                     };
                     
                     // Exibir mensagem de carregamento
@@ -343,3 +375,4 @@
     </script>
 </body>
 </html>
+
