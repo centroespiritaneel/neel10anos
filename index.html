@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1º Seminário Espírita do NEEL - São Chegados os Tempos</title>
+    <meta name="description" content="Participe do 1º Seminário Espírita do NEEL com o tema 'São Chegados os Tempos'. Palestrantes: Jorge Elarrat e Sandra Borba. Local: Auditório SESC Cidade Alta, Natal-RN.">
+    
+    <!-- Fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="img/banner.png" alt="1º Seminário Espírita do NEEL - São Chegados os Tempos" class="banner">
+        </div>
+    </header>
+    
+    <main class="container">
+        <section class="event-info">
+            <h2>Sobre o Evento</h2>
+            <p>O Núcleo Espírita Esperança de Luz (NEEL) tem o prazer de convidar você para o nosso 1º Seminário Espírita, com o tema "São Chegados os Tempos". Junte-se a nós para um dia de aprendizado, reflexão e confraternização espiritual.</p>
+            
+            <div class="event-details">
+                <div class="event-detail">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>Data</h3>
+                    <p>01 de Novembro</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fas fa-clock"></i>
+                    <h3>Horário</h3>
+                    <p>08:00 até 17:00</p>
+                </div>
+                <div class="event-detail">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Local</h3>
+                    <p>Auditório SESC Cidade Alta</p>
+                    <p>Rua Coronel Bezerra, 33, Cidade Alta, Natal - RN</p>
+                </div>
+            </div>
+            
+            <h3>Valor da Inscrição</h3>
+            <div class="price-container">
+                <div class="price-card">
+                    <div class="price-header">
+                        <i class="fas fa-ticket-alt"></i>
+                        <h3>1º Lote</h3>
+                    </div>
+                    <div class="price-value">R$ 95,00</div>
+                    <p>Participe dessa celebração especial e ajude na construção da nossa sede.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="form-section" id="inscricao">
+            <h2>Faça sua Inscrição</h2>
+            <p>Preencha o formulário abaixo para garantir sua participação no 1º Seminário Espírita do NEEL.</p>
+            
+            <form id="inscricao-form">
+                <div class="form-group">
+                    <label for="nome">Nome Completo*</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail*</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone/WhatsApp*</label>
+                    <input type="tel" id="telefone" name="telefone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cpf">CPF*</label>
+                    <input type="text" id="cpf" name="cpf" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cep">CEP*</label>
+                    <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="quantidade">Quantidade de Ingressos*</label>
+                    <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+                </div>
+                
+                <div class="form-group">
+                    <div id="valor-total" style="background-color: rgba(230, 166, 76, 0.1); padding: 15px; border-radius: 5px; text-align: center; margin-bottom: 20px; border: 1px solid #e6a64c;">
+                        <h3 style="margin-bottom: 5px; color: #e6a64c;">Valor Total</h3>
+                        <p style="font-size: 1.8rem; font-weight: 700; color: #e6a64c; margin: 0;">R$ 95,00</p>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Inscrever-se</button>
+            </form>
+        </section>
+        
+        <section class="donation-section">
+            <h2>Contribua com o NEEL</h2>
+            <p>Não poderá comparecer ao evento? Você ainda pode contribuir com a construção do espaço de estudos e atendimento da nova sede do NEEL através de uma doação via PIX.</p>
+            <button id="btn-donation" class="btn btn-donation">Quero Ajudar!</button>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://instagram.com/neelcga" target="_blank" aria-label="Instagram do NEEL">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p>&copy; 2025 Núcleo de Estudos Espíritas Leon Denis (NEEL). Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal de Doação PIX -->
+    <div id="donation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Doação via PIX</h2>
+            <p>Sua doação será destinada à construção do espaço de estudos e atendimento da nova sede do NEEL.</p>
+            
+            <div class="pix-container">
+                <img src="img/pix-qrcode.png" alt="QR Code PIX" class="pix-qrcode" onerror="this.src='https://via.placeholder.com/200/ffffff/e6a64c?text=QR+Code+PIX'">
+                <p>Ou use a chave PIX abaixo:</p>
+                <div class="pix-key">00000000000</div>
+                <p>Banco: Nome do Banco<br>Titular: NEEL - Núcleo de Estudos Espíritas Leon Denis</p>
+            </div>
+            
+            <p>Agradecemos imensamente sua contribuição!</p>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do DOM
+            const inscricaoForm = document.getElementById('inscricao-form');
+            const btnDonation = document.getElementById('btn-donation');
+            const donationModal = document.getElementById('donation-modal');
+            const closeModal = document.querySelector('.close-modal');
+            const quantidadeInput = document.getElementById('quantidade');
+            const valorTotalElement = document.getElementById('valor-total').querySelector('p');
+            
+            // Preço unitário do ingresso
+            const precoUnitario = 95.00;
+            
+            // Função para calcular e atualizar o valor total
+            function atualizarValorTotal() {
+                const quantidade = parseInt(quantidadeInput.value) || 1;
+                const valorTotal = (quantidade * precoUnitario).toFixed(2);
+                valorTotalElement.textContent = `R$ ${valorTotal.replace('.', ',')}`;
+            }
+            
+            // Atualizar valor total quando a quantidade mudar
+            quantidadeInput.addEventListener('input', atualizarValorTotal);
+            
+            // Máscara para o campo de telefone
+            const telefoneInput = document.getElementById('telefone');
+            if (telefoneInput) {
+                telefoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 11) {
+                        value = value.substring(0, 11);
+                    }
+                    
+                    // Formata o número de telefone
+                    if (value.length > 6) {
+                        value = `(${value.substring(0, 2)}) ${value.substring(2, 7)}-${value.substring(7)}`;
+                    } else if (value.length > 2) {
+                        value = `(${value.substring(0, 2)}) ${value.substring(2)}`;
+                    }
+                    
+                    e.target.value = value;
+                });
+            }
+            
+            // Máscara para o campo de CPF
+            const cpfInput = document.getElementById('cpf');
+            if (cpfInput) {
+                cpfInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 11) {
+                        value = value.substring(0, 11);
+                    }
+                    
+                    // Formata o CPF
+                    if (value.length > 9) {
+                        value = `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6, 9)}-${value.substring(9)}`;
+                    } else if (value.length > 6) {
+                        value = `${value.substring(0, 3)}.${value.substring(3, 6)}.${value.substring(6)}`;
+                    } else if (value.length > 3) {
+                        value = `${value.substring(0, 3)}.${value.substring(3)}`;
+                    }
+                    
+                    e.target.value = value;
+                });
+            }
+            
+            // Máscara para o campo de CEP
+            const cepInput = document.getElementById('cep');
+            if (cepInput) {
+                cepInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length > 8) {
+                        value = value.substring(0, 8);
+                    }
+                    
+                    // Formata o CEP
+                    if (value.length > 5) {
+                        value = `${value.substring(0, 5)}-${value.substring(5)}`;
+                    }
+                    
+                    e.target.value = value;
+                });
+            }
+            
+            // Validação e envio do formulário
+            if (inscricaoForm) {
+                inscricaoForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validação básica
+                    const nome = document.getElementById('nome').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const telefone = document.getElementById('telefone').value.trim();
+                    const cpf = document.getElementById('cpf').value.trim();
+                    const cep = document.getElementById('cep').value.trim();
+                    const quantidade = parseInt(document.getElementById('quantidade').value) || 0;
+                    
+                    if (!nome || !email || !telefone || !cpf || !cep || quantidade < 1) {
+                        alert('Por favor, preencha todos os campos obrigatórios.');
+                        return;
+                    }
+                    
+                    // Validação de e-mail
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(email)) {
+                        alert('Por favor, insira um e-mail válido.');
+                        return;
+                    }
+                    
+                    // Calcular valor total
+                    const valorTotal = (quantidade * precoUnitario).toFixed(2);
+                    
+                    // Preparar dados para envio
+                    const formData = {
+                        nome: nome,
+                        email: email,
+                        whatsapp: telefone.replace(/\D/g, ''),
+                        cpf: cpf.replace(/\D/g, ''),
+                        cep: cep.replace(/\D/g, ''),
+                        quantidade: quantidade,
+                        valor_total: valorTotal
+                    };
+                    
+                    // Exibir mensagem de carregamento
+                    const submitBtn = inscricaoForm.querySelector('button[type="submit"]');
+                    const originalBtnText = submitBtn.textContent;
+                    submitBtn.disabled = true;
+                    submitBtn.textContent = 'Processando...';
+                    
+                    // Enviar dados para o webhook do n8n
+                    fetch('https://SEU_DOMINIO_N8N/webhook/inscricao-neel', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Erro ao processar inscrição');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Sucesso:', data);
+                        
+                        // Redirecionar para o checkout do Asaas
+                        if (data.paymentUrl) {
+                            window.location.href = data.paymentUrl;
+                        } else {
+                            alert('Ocorreu um erro ao processar sua inscrição. Por favor, tente novamente.');
+                            submitBtn.disabled = false;
+                            submitBtn.textContent = originalBtnText;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro:', error);
+                        alert('Ocorreu um erro ao processar sua inscrição. Por favor, tente novamente.');
+                        
+                        // Restaurar botão
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = originalBtnText;
+                    });
+                });
+            }
+            
+            // Abrir modal de doação
+            if (btnDonation) {
+                btnDonation.addEventListener('click', function() {
+                    donationModal.style.display = 'block';
+                });
+            }
+            
+            // Fechar modal
+            if (closeModal) {
+                closeModal.addEventListener('click', function() {
+                    donationModal.style.display = 'none';
+                });
+            }
+            
+            // Fechar modal ao clicar fora dele
+            window.addEventListener('click', function(e) {
+                if (e.target === donationModal) {
+                    donationModal.style.display = 'none';
+                }
+            });
+            
+            // Fechar modal ao pressionar ESC
+            window.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && donationModal.style.display === 'block') {
+                    donationModal.style.display = 'none';
+                }
+            });
+            
+            // Inicializar o valor total
+            atualizarValorTotal();
+        });
+    </script>
+</body>
+</html>
