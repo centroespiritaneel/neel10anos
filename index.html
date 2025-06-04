@@ -34,45 +34,55 @@
             text-align: center;
         }
         
+        /* Correção do layout dos métodos de pagamento */
         .payment-method-option {
             display: flex;
             align-items: center;
-            justify-content: flex-start; /* MUDANÇA: de space-between para flex-start */
-            padding: 12px 15px;
-            margin-bottom: 0;
+            justify-content: flex-start; /* Alinhamento à esquerda */
+            gap: 15px; /* Espaçamento uniforme entre elementos */
+            padding: 15px 20px; /* Padding melhorado */
+            margin-bottom: 8px;
             border-radius: 6px;
             cursor: pointer;
-            transition: background-color 0.2s ease;
+            transition: all 0.2s ease; /* Transição suave para todos os efeitos */
+            border: 1px solid transparent; /* Borda transparente para evitar saltos */
         }
         
         .payment-method-option:hover {
             background-color: rgba(230, 166, 76, 0.1);
+            transform: translateY(-1px); /* Leve efeito de elevação */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
         }
         
         .payment-method-option.selected {
             background-color: rgba(230, 166, 76, 0.2);
             border: 1px solid rgba(230, 166, 76, 0.5);
+            box-shadow: 0 2px 8px rgba(230, 166, 76, 0.2); /* Sombra dourada */
         }
         
+        /* Ajuste do radio button */
         .payment-method-radio {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 10px; /* Espaçamento entre radio e label */
         }
         
         .payment-method-radio input[type="radio"] {
-            margin-right: 0;
+            margin: 0; /* Remove margens padrão */
             accent-color: #e6a64c;
+            width: 18px; /* Tamanho fixo */
+            height: 18px; /* Tamanho fixo */
         }
         
+        /* Ajuste do label e ícone */
         .payment-method-label {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px; /* Espaçamento entre ícone e texto */
+            font-weight: 500; /* Texto um pouco mais destacado */
         }
         
         .payment-method-icon {
-            margin-right: 0;
             color: #e6a64c;
             font-size: 1.2rem;
         }
@@ -171,6 +181,37 @@
             opacity: 0.6;
             cursor: not-allowed;
         }
+        
+        /* Responsividade para dispositivos móveis */
+        @media (max-width: 768px) {
+            .payment-method-option {
+                padding: 12px 15px; /* Padding reduzido */
+            }
+            
+            .payment-method-icon {
+                font-size: 1.1rem; /* Ícone um pouco menor */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .payment-method-option {
+                padding: 10px 12px; /* Padding ainda menor */
+                gap: 10px; /* Gap menor */
+            }
+            
+            .payment-method-radio input[type="radio"] {
+                width: 16px; /* Radio menor */
+                height: 16px; /* Radio menor */
+            }
+            
+            .payment-method-label {
+                font-size: 0.9rem; /* Texto menor */
+            }
+            
+            .payment-method-icon {
+                font-size: 1rem; /* Ícone menor */
+            }
+        }
     </style>
 </head>
 <body>
@@ -256,24 +297,17 @@
                     <div class="payment-method-container">
                         <h3 class="payment-method-title">Método de Pagamento</h3>
                         
+                        <!-- Estrutura simplificada para melhor alinhamento -->
                         <div class="payment-method-option" id="option-pix">
-                            <div class="payment-method-radio">
-                                <input type="radio" id="pagamento-pix" name="metodoPagamento" value="PIX" checked>
-                                <div class="payment-method-label">
-                                    <i class="fas fa-qrcode payment-method-icon"></i>
-                                    <span>Pagar com PIX</span>
-                                </div>
-                            </div>
+                            <input type="radio" id="pagamento-pix" name="metodoPagamento" value="PIX" checked>
+                            <i class="fas fa-qrcode payment-method-icon"></i>
+                            <span>Pagar com PIX</span>
                         </div>
                         
                         <div class="payment-method-option" id="option-cartao">
-                            <div class="payment-method-radio">
-                                <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
-                                <div class="payment-method-label">
-                                    <i class="fas fa-credit-card payment-method-icon"></i>
-                                    <span>Pagar com Cartão de Crédito</span>
-                                </div>
-                            </div>
+                            <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
+                            <i class="fas fa-credit-card payment-method-icon"></i>
+                            <span>Pagar com Cartão de Crédito</span>
                         </div>
                     </div>
                 </div>
