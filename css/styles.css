@@ -239,160 +239,166 @@ input:focus, select:focus {
   width: 100%;
 }
 
-/* === ESTILOS DOS MÉTODOS DE PAGAMENTO === */
-.payment-method-container {
-  border: 1px solid rgba(230, 166, 76, 0.3);
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
-  background-color: rgba(0, 0, 0, 0.2);
+/* === ESTILOS DOS MÉTODOS DE PAGAMENTO - VERSÃO SUPER ESPECÍFICA === */
+.form-group .payment-method-container {
+  border: 1px solid rgba(230, 166, 76, 0.3) !important;
+  border-radius: 8px !important;
+  padding: 15px !important;
+  margin-bottom: 20px !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
 }
 
-.payment-method-title {
-  margin-top: 0;
-  margin-bottom: 15px;
-  color: #e6a64c;
-  font-weight: 600;
-  text-align: center;
+.form-group .payment-method-container .payment-method-title {
+  margin-top: 0 !important;
+  margin-bottom: 15px !important;
+  color: #e6a64c !important;
+  font-weight: 600 !important;
+  text-align: center !important;
 }
 
-.payment-method-option {
+.form-group .payment-method-container .payment-method-option {
   display: flex !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  padding: 12px 15px;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  padding: 12px 15px !important;
+  margin-bottom: 8px !important;
+  border-radius: 6px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
 }
 
-.payment-method-option:hover {
-  background-color: rgba(230, 166, 76, 0.1);
+.form-group .payment-method-container .payment-method-option:hover {
+  background-color: rgba(230, 166, 76, 0.1) !important;
 }
 
-.payment-method-option.selected {
-  background-color: rgba(230, 166, 76, 0.2);
-  border: 1px solid rgba(230, 166, 76, 0.5);
+.form-group .payment-method-container .payment-method-option.selected {
+  background-color: rgba(230, 166, 76, 0.2) !important;
+  border: 1px solid rgba(230, 166, 76, 0.5) !important;
 }
 
-.payment-method-radio {
+.form-group .payment-method-container .payment-method-option .payment-method-radio {
   display: flex !important;
   align-items: center !important;
   gap: 10px !important;
   margin: 0 !important;
+  padding: 0 !important;
 }
 
-.payment-method-radio input[type="radio"] {
+.form-group .payment-method-container .payment-method-option .payment-method-radio input[type="radio"] {
   margin: 0 !important;
-  accent-color: #e6a64c;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  accent-color: #e6a64c !important;
 }
 
-.payment-method-label {
+.form-group .payment-method-container .payment-method-option .payment-method-radio .payment-method-label {
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  margin: 0 !important;
 }
 
-.payment-method-icon {
+.form-group .payment-method-container .payment-method-option .payment-method-radio .payment-method-label .payment-method-icon {
   margin: 0 !important;
-  color: #e6a64c;
-  font-size: 1.2rem;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  color: #e6a64c !important;
+  font-size: 1.2rem !important;
 }
 
 /* Estilo para o select de parcelas */
-.installments-container {
-  margin-bottom: 20px;
+.form-group .installments-container {
+  margin-bottom: 20px !important;
 }
 
-.installments-label {
-  display: block;
-  margin-bottom: 8px;
-  color: #e6a64c;
-  font-weight: 600;
-  text-align: center;
+.form-group .installments-container .installments-label {
+  display: block !important;
+  margin-bottom: 8px !important;
+  color: #e6a64c !important;
+  font-weight: 600 !important;
+  text-align: center !important;
 }
 
-.installments-select {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid rgba(230, 166, 76, 0.3);
-  border-radius: 6px;
-  background-color: rgba(0, 0, 0, 0.2);
-  color: #fff;
-  font-size: 16px;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6a64c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 40px;
-  text-align: center;
+.form-group .installments-container .installments-select {
+  width: 100% !important;
+  padding: 12px !important;
+  border: 1px solid rgba(230, 166, 76, 0.3) !important;
+  border-radius: 6px !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23e6a64c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 12px center !important;
+  background-size: 16px !important;
+  padding-right: 40px !important;
+  text-align: center !important;
 }
 
-.installments-select:focus {
-  outline: none;
-  border-color: #e6a64c;
-  box-shadow: 0 0 0 2px rgba(230, 166, 76, 0.2);
+.form-group .installments-container .installments-select:focus {
+  outline: none !important;
+  border-color: #e6a64c !important;
+  box-shadow: 0 0 0 2px rgba(230, 166, 76, 0.2) !important;
 }
 
-.installments-select:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.form-group .installments-container .installments-select:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
 }
 
-.installments-select option {
-  background-color: #331a12;
-  color: #fff;
+.form-group .installments-container .installments-select option {
+  background-color: #331a12 !important;
+  color: #fff !important;
 }
 
 /* Estilo para o valor total */
-.valor-total-container {
-  background-color: rgba(230, 166, 76, 0.1);
-  padding: 15px;
-  border-radius: 5px;
-  text-align: center;
-  margin-bottom: 20px;
-  border: 1px solid #e6a64c;
+.form-group .valor-total-container {
+  background-color: rgba(230, 166, 76, 0.1) !important;
+  padding: 15px !important;
+  border-radius: 5px !important;
+  text-align: center !important;
+  margin-bottom: 20px !important;
+  border: 1px solid #e6a64c !important;
 }
 
-.valor-total-title {
-  margin-bottom: 5px;
-  color: #e6a64c;
-  font-weight: 600;
+.form-group .valor-total-container .valor-total-title {
+  margin-bottom: 5px !important;
+  color: #e6a64c !important;
+  font-weight: 600 !important;
 }
 
-.valor-total-value {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #e6a64c;
-  margin: 0;
+.form-group .valor-total-container .valor-total-value {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  color: #e6a64c !important;
+  margin: 0 !important;
 }
 
 /* Estilo para o botão de finalizar */
-.btn-finalizar {
-  width: 100%;
-  padding: 14px;
-  background-color: #e6a64c;
-  border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+.form-group .btn-finalizar {
+  width: 100% !important;
+  padding: 14px !important;
+  background-color: #e6a64c !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: #fff !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s ease !important;
 }
 
-.btn-finalizar:hover {
-  background-color: #d4942c;
+.form-group .btn-finalizar:hover {
+  background-color: #d4942c !important;
 }
 
-.btn-finalizar:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.form-group .btn-finalizar:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
 }
 
 /* Seção de doação PIX */
