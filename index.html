@@ -457,12 +457,15 @@
           })
             .then((response) => response.json())
             .then((data) => {
-              if (data.paymentUrl) {
+              console.log('Sucesso:', data);
+              
+              // ✅ CORREÇÃO: Verificar se a inscrição foi processada com sucesso
+              if (data.success && data.paymentUrl) {
+                // Redirecionar para o link de pagamento do Asaas
                 window.location.href = data.paymentUrl;
               } else {
-                alert('Erro ao obter link de pagamento. Tente novamente.');
-                submitBtn.disabled = false;
-                submitBtn.textContent = originalBtnText;
+                // Se não conseguiu gerar o link, mostrar erro
+                throw new Error(data.message || 'Erro ao gerar link de pagamento');
               }
             })
             .catch((error) => {
