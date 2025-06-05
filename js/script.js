@@ -103,11 +103,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 console.log('Sucesso:', data);
                 
-                // Aqui seria o redirecionamento para o checkout do Asaas
-                // window.location.href = data.checkoutUrl; // URL que virá do n8n/Asaas
-                
-                // Temporariamente, redireciona para a página de agradecimento
-                window.location.href = 'obrigado.html';
+                // Verificar se a inscrição foi processada com sucesso
+                if (data.success && data.paymentUrl) {
+                    // Redirecionar para o link de pagamento do Asaas
+                    window.location.href = data.paymentUrl;
+                } else {
+                    // Se não conseguiu gerar o link, mostrar erro
+                    throw new Error(data.message || 'Erro ao gerar link de pagamento');
+                }
             })
             .catch(error => {
                 console.error('Erro:', error);
