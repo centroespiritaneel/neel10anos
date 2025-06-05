@@ -459,13 +459,16 @@
             .then((data) => {
               console.log('Sucesso:', data);
               
-              // ✅ CORREÇÃO: Verificar se a inscrição foi processada com sucesso
-              if (data.success && data.paymentUrl) {
+              // ✅ CORREÇÃO: Acessar o primeiro item do array se for array
+              const response = Array.isArray(data) ? data[0] : data;
+              
+              // Verificar se a inscrição foi processada com sucesso
+              if (response.success && response.paymentUrl) {
                 // Redirecionar para o link de pagamento do Asaas
-                window.location.href = data.paymentUrl;
+                window.location.href = response.paymentUrl;
               } else {
                 // Se não conseguiu gerar o link, mostrar erro
-                throw new Error(data.message || 'Erro ao gerar link de pagamento');
+                throw new Error(response.message || 'Erro ao gerar link de pagamento');
               }
             })
             .catch((error) => {
