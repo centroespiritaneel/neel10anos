@@ -252,16 +252,10 @@
                             <span class="payment-option-label">Pagar com PIX</span>
                         </label>
                         
-                        <label class="payment-option" id="option-credito">
-                            <input type="radio" id="pagamento-credito" name="metodoPagamento" value="CREDIT_CARD">
+                        <label class="payment-option" id="option-cartao">
+                            <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
                             <i class="fas fa-credit-card"></i>
-                            <span class="payment-option-label">Pagar com Cartão de Crédito</span>
-                        </label>
-                        
-                        <label class="payment-option" id="option-debito">
-                            <input type="radio" id="pagamento-debito" name="metodoPagamento" value="DEBIT_CARD">
-                            <i class="fas fa-money-check-alt"></i>
-                            <span class="payment-option-label">Pagar com Cartão de Débito</span>
+                            <span class="payment-option-label">Pagar com Cartão (Crédito/Débito)</span>
                         </label>
                     </div>
                 </div>
@@ -333,12 +327,10 @@
         const valorTotalElement = document.querySelector('.valor-total-value');
         const form = document.querySelector('#inscricao-form');
         const metodoPix = document.querySelector('#pagamento-pix');
-        const metodoCredito = document.querySelector('#pagamento-credito');
-        const metodoDebito = document.querySelector('#pagamento-debito');
+        const metodoCartao = document.querySelector('#pagamento-cartao');
         const selectParcelas = document.querySelector('#parcelas');
         const optionPix = document.querySelector('#option-pix');
-        const optionCredito = document.querySelector('#option-credito');
-        const optionDebito = document.querySelector('#option-debito');
+        const optionCartao = document.querySelector('#option-cartao');
 
         // Função para calcular e atualizar o valor total
         function atualizarValorTotal() {
@@ -349,27 +341,21 @@
             // Sem taxa para PIX
             const valorDesejado = PRECO_UNITARIO * qtd;
             valorTotalElement.textContent = `R$ ${valorDesejado.toFixed(2).replace('.', ',')}`;
-          } else if (metodoCredito.checked) {
-            // Com taxa para Cartão de Crédito
+          } else if (metodoCartao.checked) {
+            // Com taxa para Cartão (crédito/débito unificado)
             const valorDesejado = PRECO_UNITARIO * qtd;
             const parcelas = parseInt(selectParcelas.value, 10) || 1;
-            const taxaPercentual = parcelas === 1 ? 0.0299 : 0.0349;
+            const taxaPercentual = parcelas === 1 ? 0.0299 : 0.0349; // 2,99% à vista, 3,49% parcelado
             const taxaFixa = 0.49;
 
             let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
             bruto = Math.ceil(bruto * 100) / 100;
 
-            valorTotalElement.textContent = `Valor Total (Crédito ${parcelas}× + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
-          } else if (metodoDebito.checked) {
-            // Com taxa para Cartão de Débito (sempre à vista)
-            const valorDesejado = PRECO_UNITARIO * qtd;
-            const taxaPercentual = 0.0189; // 1,89%
-            const taxaFixa = 0.35; // R$ 0,35
-
-            let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
-            bruto = Math.ceil(bruto * 100) / 100;
-
-            valorTotalElement.textContent = `Valor Total (Débito + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
+            if (parcelas === 1) {
+              valorTotalElement.textContent = `Valor Total (Cartão à vista + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
+            } else {
+              valorTotalElement.textContent = `Valor Total (Cartão ${parcelas}× + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
+            }
           }
         }
 
@@ -380,29 +366,17 @@
         optionPix.addEventListener('click', function() {
           metodoPix.checked = true;
           optionPix.classList.add('selected');
-          optionCredito.classList.remove('selected');
-          optionDebito.classList.remove('selected');
+          optionCartao.classList.remove('selected');
           selectParcelas.setAttribute('disabled', 'disabled');
           selectParcelas.value = '1';
           atualizarValorTotal();
         });
         
-        optionCredito.addEventListener('click', function() {
-          metodoCredito.checked = true;
-          optionCredito.classList.add('selected');
+        optionCartao.addEventListener('click', function() {
+          metodoCartao.checked = true;
+          optionCartao.classList.add('selected');
           optionPix.classList.remove('selected');
-          optionDebito.classList.remove('selected');
           selectParcelas.removeAttribute('disabled');
-          atualizarValorTotal();
-        });
-
-        optionDebito.addEventListener('click', function() {
-          metodoDebito.checked = true;
-          optionDebito.classList.add('selected');
-          optionPix.classList.remove('selected');
-          optionCredito.classList.remove('selected');
-          selectParcelas.setAttribute('disabled', 'disabled');
-          selectParcelas.value = '1';
           atualizarValorTotal();
         });
 
@@ -417,29 +391,16 @@
             selectParcelas.setAttribute('disabled', 'disabled');
             selectParcelas.value = '1';
             optionPix.classList.add('selected');
-            optionCredito.classList.remove('selected');
-            optionDebito.classList.remove('selected');
+            optionCartao.classList.remove('selected');
           }
           atualizarValorTotal();
         });
         
-        metodoCredito.addEventListener('change', function () {
-          if (metodoCredito.checked) {
+        metodoCartao.addEventListener('change', function () {
+          if (metodoCartao.checked) {
             selectParcelas.removeAttribute('disabled');
-            optionCredito.classList.add('selected');
+            optionCartao.classList.add('selected');
             optionPix.classList.remove('selected');
-            optionDebito.classList.remove('selected');
-          }
-          atualizarValorTotal();
-        });
-
-        metodoDebito.addEventListener('change', function () {
-          if (metodoDebito.checked) {
-            selectParcelas.setAttribute('disabled', 'disabled');
-            selectParcelas.value = '1';
-            optionDebito.classList.add('selected');
-            optionPix.classList.remove('selected');
-            optionCredito.classList.remove('selected');
           }
           atualizarValorTotal();
         });
@@ -489,12 +450,10 @@
           let quantidade = parseInt(selectQuantidade.value, 10);
           if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
 
-          let billingType = 'PIX';
-          if (metodoCredito.checked) billingType = 'CREDIT_CARD';
-          if (metodoDebito.checked) billingType = 'DEBIT_CARD';
+          const billingType = metodoPix.checked ? 'PIX' : 'CREDIT_CARD';
 
           let parcelas = 1;
-          if (metodoCredito.checked) {
+          if (metodoCartao.checked) {
             parcelas = parseInt(selectParcelas.value, 10);
           }
 
