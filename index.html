@@ -454,11 +454,38 @@
         form.addEventListener('submit', function (e) {
           e.preventDefault();
 
+          // Validações no frontend antes de enviar
           const nome = document.querySelector('#nome').value.trim();
           const email = document.querySelector('#email').value.trim();
           const whatsapp = document.querySelector('#telefone').value.trim();
           const cpf = document.querySelector('#cpf').value.trim();
           const cep = document.querySelector('#cep').value.trim();
+
+          // Validar campos obrigatórios
+          if (!nome || nome.length < 3) {
+            alert('Nome deve ter pelo menos 3 caracteres');
+            return;
+          }
+
+          if (!email || !validarEmail(email)) {
+            alert('Por favor, insira um email válido');
+            return;
+          }
+
+          if (!whatsapp || whatsapp.replace(/\D/g, '').length < 10) {
+            alert('Por favor, insira um telefone válido');
+            return;
+          }
+
+          if (!cpf || !validarCPF(cpf)) {
+            alert('Por favor, insira um CPF válido');
+            return;
+          }
+
+          if (!cep || cep.replace(/\D/g, '').length !== 8) {
+            alert('Por favor, insira um CEP válido');
+            return;
+          }
           let quantidade = parseInt(selectQuantidade.value, 10);
           if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
 
@@ -565,7 +592,31 @@
             });
         }
         
-        // Máscara para o campo de CPF
+        // Função para validar CPF
+        function validarCPF(cpf) {
+            cpf = cpf.replace(/\D/g, '');
+            if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+            
+            let soma = 0;
+            for (let i = 0; i < 9; i++) soma += parseInt(cpf[i]) * (10 - i);
+            let resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            if (resto !== parseInt(cpf[9])) return false;
+            
+            soma = 0;
+            for (let i = 0; i < 10; i++) soma += parseInt(cpf[i]) * (11 - i);
+            resto = (soma * 10) % 11;
+            if (resto === 10 || resto === 11) resto = 0;
+            return resto === parseInt(cpf[10]);
+        }
+
+        // Função para validar email
+        function validarEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Máscara e validação para o campo de CPF
         const cpfInput = document.getElementById('cpf');
         if (cpfInput) {
             cpfInput.addEventListener('input', function(e) {
@@ -584,6 +635,33 @@
                 }
                 
                 e.target.value = value;
+            });
+
+            // Validação do CPF ao sair do campo
+            cpfInput.addEventListener('blur', function(e) {
+                const cpf = e.target.value;
+                if (cpf && !validarCPF(cpf)) {
+                    e.target.setCustomValidity('CPF inválido');
+                    e.target.style.borderColor = '#ff4757';
+                } else {
+                    e.target.setCustomValidity('');
+                    e.target.style.borderColor = '';
+                }
+            });
+        }
+
+        // Validação do email
+        const emailInput = document.getElementById('email');
+        if (emailInput) {
+            emailInput.addEventListener('blur', function(e) {
+                const email = e.target.value;
+                if (email && !validarEmail(email)) {
+                    e.target.setCustomValidity('Email inválido');
+                    e.target.style.borderColor = '#ff4757';
+                } else {
+                    e.target.setCustomValidity('');
+                    e.target.style.borderColor = '';
+                }
             });
         }
         
