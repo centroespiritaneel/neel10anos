@@ -229,7 +229,18 @@
                 
                 <div class="form-group">
                     <label for="quantidade">Quantidade de Ingressos*</label>
-                    <input type="number" id="quantidade" name="quantidade" min="1" value="1" required>
+                    <select id="quantidade" name="quantidade" required>
+                        <option value="1">1 ingresso</option>
+                        <option value="2">2 ingressos</option>
+                        <option value="3">3 ingressos</option>
+                        <option value="4">4 ingressos</option>
+                        <option value="5">5 ingressos</option>
+                        <option value="6">6 ingressos</option>
+                        <option value="7">7 ingressos</option>
+                        <option value="8">8 ingressos</option>
+                        <option value="9">9 ingressos</option>
+                        <option value="10">10 ingressos</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
@@ -241,17 +252,23 @@
                             <span class="payment-option-label">Pagar com PIX</span>
                         </label>
                         
-                        <label class="payment-option" id="option-cartao">
-                            <input type="radio" id="pagamento-cartao" name="metodoPagamento" value="CREDIT_CARD">
+                        <label class="payment-option" id="option-credito">
+                            <input type="radio" id="pagamento-credito" name="metodoPagamento" value="CREDIT_CARD">
                             <i class="fas fa-credit-card"></i>
-                            <span class="payment-option-label">Pagar com Cartão de Crédito/Débito</span>
+                            <span class="payment-option-label">Pagar com Cartão de Crédito</span>
+                        </label>
+                        
+                        <label class="payment-option" id="option-debito">
+                            <input type="radio" id="pagamento-debito" name="metodoPagamento" value="DEBIT_CARD">
+                            <i class="fas fa-money-check-alt"></i>
+                            <span class="payment-option-label">Pagar com Cartão de Débito</span>
                         </label>
                     </div>
                 </div>
                 
                 <div class="form-group installments-container">
                     <label for="parcelas" class="installments-label">
-                        Quantas parcelas? (Cartão de Crédito)
+                        Quantas parcelas? (Somente Cartão de Crédito)
                     </label>
                     <select id="parcelas" name="parcelas" class="installments-select" disabled required>
                         <option value="1">1× (à vista)</option>
@@ -309,30 +326,31 @@
     <!-- Scripts -->
     <script>
       // Preço líquido desejado por ingresso
-      //const PRECO_UNITARIO = 95.00;
       const PRECO_UNITARIO = 95.00;
         
       document.addEventListener('DOMContentLoaded', function () {
-        const inputQuantidade = document.querySelector('#quantidade');
+        const selectQuantidade = document.querySelector('#quantidade');
         const valorTotalElement = document.querySelector('.valor-total-value');
         const form = document.querySelector('#inscricao-form');
         const metodoPix = document.querySelector('#pagamento-pix');
-        const metodoCartao = document.querySelector('#pagamento-cartao');
+        const metodoCredito = document.querySelector('#pagamento-credito');
+        const metodoDebito = document.querySelector('#pagamento-debito');
         const selectParcelas = document.querySelector('#parcelas');
         const optionPix = document.querySelector('#option-pix');
-        const optionCartao = document.querySelector('#option-cartao');
+        const optionCredito = document.querySelector('#option-credito');
+        const optionDebito = document.querySelector('#option-debito');
 
         // Função para calcular e atualizar o valor total
         function atualizarValorTotal() {
-          let qtd = parseInt(inputQuantidade.value, 10) || 1;
+          let qtd = parseInt(selectQuantidade.value, 10) || 1;
           if (qtd < 1) qtd = 1;
 
           if (metodoPix.checked) {
             // Sem taxa para PIX
             const valorDesejado = PRECO_UNITARIO * qtd;
             valorTotalElement.textContent = `R$ ${valorDesejado.toFixed(2).replace('.', ',')}`;
-          } else {
-            // Com taxa para Cartão
+          } else if (metodoCredito.checked) {
+            // Com taxa para Cartão de Crédito
             const valorDesejado = PRECO_UNITARIO * qtd;
             const parcelas = parseInt(selectParcelas.value, 10) || 1;
             const taxaPercentual = parcelas === 1 ? 0.0299 : 0.0349;
@@ -341,54 +359,87 @@
             let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
             bruto = Math.ceil(bruto * 100) / 100;
 
-            valorTotalElement.textContent = `Valor Total (Cartão em ${parcelas}× + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
+            valorTotalElement.textContent = `Valor Total (Crédito ${parcelas}× + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
+          } else if (metodoDebito.checked) {
+            // Com taxa para Cartão de Débito (sempre à vista)
+            const valorDesejado = PRECO_UNITARIO * qtd;
+            const taxaPercentual = 0.0189; // 1,89%
+            const taxaFixa = 0.35; // R$ 0,35
+
+            let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
+            bruto = Math.ceil(bruto * 100) / 100;
+
+            valorTotalElement.textContent = `Valor Total (Débito + taxas): R$ ${bruto.toFixed(2).replace('.', ',')}`;
           }
         }
 
         // Recalcular quando mudar quantidade
-        inputQuantidade.addEventListener('input', atualizarValorTotal);
+        selectQuantidade.addEventListener('change', atualizarValorTotal);
 
         // Melhorar a experiência de seleção do método de pagamento
         optionPix.addEventListener('click', function() {
           metodoPix.checked = true;
           optionPix.classList.add('selected');
-          optionCartao.classList.remove('selected');
+          optionCredito.classList.remove('selected');
+          optionDebito.classList.remove('selected');
           selectParcelas.setAttribute('disabled', 'disabled');
           selectParcelas.value = '1';
           atualizarValorTotal();
         });
         
-        optionCartao.addEventListener('click', function() {
-          metodoCartao.checked = true;
-          optionCartao.classList.add('selected');
+        optionCredito.addEventListener('click', function() {
+          metodoCredito.checked = true;
+          optionCredito.classList.add('selected');
           optionPix.classList.remove('selected');
+          optionDebito.classList.remove('selected');
           selectParcelas.removeAttribute('disabled');
+          atualizarValorTotal();
+        });
+
+        optionDebito.addEventListener('click', function() {
+          metodoDebito.checked = true;
+          optionDebito.classList.add('selected');
+          optionPix.classList.remove('selected');
+          optionCredito.classList.remove('selected');
+          selectParcelas.setAttribute('disabled', 'disabled');
+          selectParcelas.value = '1';
           atualizarValorTotal();
         });
 
         // Inicializar a seleção visual
         if (metodoPix.checked) {
           optionPix.classList.add('selected');
-        } else {
-          optionCartao.classList.add('selected');
         }
 
-        // Habilitar/desabilitar parcelas conforme método
+        // Eventos de mudança para os radio buttons
         metodoPix.addEventListener('change', function () {
           if (metodoPix.checked) {
             selectParcelas.setAttribute('disabled', 'disabled');
             selectParcelas.value = '1';
             optionPix.classList.add('selected');
-            optionCartao.classList.remove('selected');
+            optionCredito.classList.remove('selected');
+            optionDebito.classList.remove('selected');
           }
           atualizarValorTotal();
         });
         
-        metodoCartao.addEventListener('change', function () {
-          if (metodoCartao.checked) {
+        metodoCredito.addEventListener('change', function () {
+          if (metodoCredito.checked) {
             selectParcelas.removeAttribute('disabled');
-            optionCartao.classList.add('selected');
+            optionCredito.classList.add('selected');
             optionPix.classList.remove('selected');
+            optionDebito.classList.remove('selected');
+          }
+          atualizarValorTotal();
+        });
+
+        metodoDebito.addEventListener('change', function () {
+          if (metodoDebito.checked) {
+            selectParcelas.setAttribute('disabled', 'disabled');
+            selectParcelas.value = '1';
+            optionDebito.classList.add('selected');
+            optionPix.classList.remove('selected');
+            optionCredito.classList.remove('selected');
           }
           atualizarValorTotal();
         });
@@ -408,25 +459,16 @@
           const whatsapp = document.querySelector('#telefone').value.trim();
           const cpf = document.querySelector('#cpf').value.trim();
           const cep = document.querySelector('#cep').value.trim();
-          let quantidade = parseInt(inputQuantidade.value, 10);
+          let quantidade = parseInt(selectQuantidade.value, 10);
           if (isNaN(quantidade) || quantidade < 1) quantidade = 1;
 
-          const billingType = metodoPix.checked ? 'PIX' : 'CREDIT_CARD';
-          let parcelas = 1;
-          if (metodoCartao.checked) {
-            parcelas = parseInt(selectParcelas.value, 10);
-          }
+          let billingType = 'PIX';
+          if (metodoCredito.checked) billingType = 'CREDIT_CARD';
+          if (metodoDebito.checked) billingType = 'DEBIT_CARD';
 
-          const valorDesejado = PRECO_UNITARIO * quantidade;
-          let valorTotalBruto;
-          if (billingType === 'PIX') {
-            valorTotalBruto = valorDesejado;
-          } else {
-            const taxaPercentual = parcelas === 1 ? 0.0299 : 0.0349;
-            const taxaFixa = 0.49;
-            let bruto = (valorDesejado + taxaFixa) / (1 - taxaPercentual);
-            bruto = Math.ceil(bruto * 100) / 100;
-            valorTotalBruto = bruto;
+          let parcelas = 1;
+          if (metodoCredito.checked) {
+            parcelas = parseInt(selectParcelas.value, 10);
           }
 
           const formData = {
@@ -436,7 +478,6 @@
             cpf: cpf.replace(/\D/g, ''),
             cep: cep.replace(/\D/g, ''),
             quantidade: quantidade,
-            valor_total: valorTotalBruto.toFixed(2),
             billingType: billingType,
             installments: parcelas
           };
@@ -456,15 +497,11 @@
             .then((data) => {
               console.log('Sucesso:', data);
               
-              // ✅ CORREÇÃO: Acessar o primeiro item do array se for array
               const response = Array.isArray(data) ? data[0] : data;
               
-              // Verificar se a inscrição foi processada com sucesso
               if (response.success && response.paymentUrl) {
-                // Redirecionar para o link de pagamento do Asaas
                 window.location.href = response.paymentUrl;
               } else {
-                // Se não conseguiu gerar o link, mostrar erro
                 throw new Error(response.message || 'Erro ao gerar link de pagamento');
               }
             })
