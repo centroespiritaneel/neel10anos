@@ -6,6 +6,24 @@
     <title>1º Seminário Espírita do NEEL - São Chegados os Tempos</title>
     <meta name="description" content="Participe do 1º Seminário Espírita do NEEL com o tema 'São Chegados os Tempos'. Palestrantes: Jorge Elarrat e Sandra Borba. Local: Auditório SESC Cidade Alta, Natal-RN.">
     
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2353902015011610');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+      src="https://www.facebook.com/tr?id=2353902015011610&ev=PageView&noscript=1"
+    /></noscript>
+    <!-- End Meta Pixel Code -->
+    
     <!-- Fontes -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -417,6 +435,15 @@
         form.addEventListener('submit', function (e) {
           e.preventDefault();
 
+          // Disparar evento do Meta Pixel para início do processo de compra
+          fbq('track', 'InitiateCheckout', {
+            content_name: 'Inscrição 1º Seminário Espírita NEEL',
+            content_category: 'Evento/Seminário',
+            num_items: parseInt(selectQuantidade.value, 10),
+            currency: 'BRL',
+            value: parseFloat(valorTotalElement.textContent.replace(/[^\d,]/g, '').replace(',', '.'))
+          });
+
           // Validações no frontend antes de enviar
           const nome = document.querySelector('#nome').value.trim();
           const email = document.querySelector('#email').value.trim();
@@ -488,6 +515,14 @@
               const response = Array.isArray(data) ? data[0] : data;
               
               if (response.success && response.paymentUrl) {
+                // Disparar evento de Lead quando o pagamento é gerado com sucesso
+                fbq('track', 'Lead', {
+                  content_name: 'Lead Gerado - Seminário NEEL',
+                  content_category: 'Evento/Seminário',
+                  value: parseFloat(valorTotalElement.textContent.replace(/[^\d,]/g, '').replace(',', '.')),
+                  currency: 'BRL'
+                });
+                
                 window.location.href = response.paymentUrl;
               } else {
                 throw new Error(response.message || 'Erro ao gerar link de pagamento');
@@ -508,6 +543,12 @@
         
         if (btnDonation) {
             btnDonation.addEventListener('click', function() {
+                // Disparar evento do Meta Pixel para interesse em doação
+                fbq('track', 'ViewContent', {
+                  content_name: 'Modal Doação NEEL',
+                  content_category: 'Doação/Contribuição'
+                });
+                
                 donationModal.style.display = 'block';
             });
         }
@@ -643,6 +684,63 @@
                 e.target.value = value;
             });
         }
+
+        // Rastrear scroll depth para engajamento
+        let maxScroll = 0;
+        window.addEventListener('scroll', function() {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > maxScroll) {
+                maxScroll = scrollPercent;
+                
+                // Disparar eventos em marcos importantes
+                if (maxScroll >= 25 && !window.scroll25) {
+                    window.scroll25 = true;
+                    fbq('track', 'ViewContent', {
+                        content_name: '25% da Página Visualizada',
+                        content_category: 'Engajamento'
+                    });
+                }
+                
+                if (maxScroll >= 50 && !window.scroll50) {
+                    window.scroll50 = true;
+                    fbq('track', 'ViewContent', {
+                        content_name: '50% da Página Visualizada',
+                        content_category: 'Engajamento'
+                    });
+                }
+                
+                if (maxScroll >= 75 && !window.scroll75) {
+                    window.scroll75 = true;
+                    fbq('track', 'ViewContent', {
+                        content_name: '75% da Página Visualizada',
+                        content_category: 'Engajamento'
+                    });
+                }
+            }
+        });
+
+        // Rastrear tempo na página
+        let timeOnPage = 0;
+        setInterval(function() {
+            timeOnPage += 30;
+            
+            // Disparar eventos em marcos de tempo
+            if (timeOnPage === 60 && !window.time60) {
+                window.time60 = true;
+                fbq('track', 'ViewContent', {
+                    content_name: '1 Minuto na Página',
+                    content_category: 'Engajamento'
+                });
+            }
+            
+            if (timeOnPage === 180 && !window.time180) {
+                window.time180 = true;
+                fbq('track', 'ViewContent', {
+                    content_name: '3 Minutos na Página',
+                    content_category: 'Engajamento'
+                });
+            }
+        }, 30000); // A cada 30 segundos
       });
     </script>
 </body>
